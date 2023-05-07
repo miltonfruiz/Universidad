@@ -1,4 +1,4 @@
-''' Ejercicio N° 2 
+''' Ejercicio N° 3 
 
 Se van ingresando números distintos de cero, salvo el último valor. Determinar su suma.
 
