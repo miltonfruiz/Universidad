@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="https://structorizer.fisch.lu" version="3.32-11" preRepeat="until " postFor="to" preReturn="return" postForIn="in" preWhile="while " output="OUTPUT" input="INPUT" preFor="for" preExit="exit" preLeave="leave" ignoreCase="true" preThrow="throw" preForIn="foreach" stepFor="by" namespace="" author="milton" created="2023-05-27" changedby="milton" changed="2023-05-27" origin="Structorizer 3.32-11" text="&#34;LOCALES&#34;,&#34;&#34;,&#34;var mayor, tcovid, tanti: integer;&#34;,&#34;       cmayor: string;&#34;" comment="&#34;&#34;" color="ffffff" type="program" style="nice">
+	<children>
+		<instruction text="&#34;mayor &#60;- 0&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;cmayor &#60;- 0&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;tcovid &#60;- 0&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;tanti &#60;- 0&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+	</children>
+</root>
