@@ -25,7 +25,7 @@ def program():
 	clearconsole()
 	print(blanco+'>>> B I E N V E N I D O  <<<'+cierre)
 	print()
-	decision = input('¿Desea iniciar sesion? S / N ').upper()
+	decision = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
 	print()
 	while (decision != 'N') and (decision != 'S'):
 		clearconsole()
@@ -33,7 +33,7 @@ def program():
 		print()
 		print(rojo+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
 		print()
-		decision = input('¿Desea iniciar sesion? S / N ').upper()
+		decision = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
 	clearconsole()
 	while(decision != 'N' and attempts != 0):
 		print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
@@ -69,18 +69,21 @@ def program():
 			if((userLogin == users) and (userPassword != password)):
 				print()
 				print(rojo+'x ¡Contraseña ingresada incorecta!'+cierre)
+				print('- - - - - - - - - - - - - - - - - - - - - ')
 				print()
 				print(azul+'# Contraseña:'+cierre,userPassword)
 				print()
 			elif((userLogin != users) and (userPassword == password)):
 				print()
 				print(rojo+'x El usuario ingresado no está registrado!'+cierre)
+				print('- - - - - - - - - - - - - - - - - - - - - ')
 				print()
 				print(azul+'# Usuario:'+cierre,userLogin)
 				print()
 			elif((userLogin != users) and (userPassword != password)):
 				print()
 				print(rojo+'x ¡Los datos ingresados son incorrectos!'+cierre)
+				print('- - - - - - - - - - - - - - - - - - - - - ')
 				print()
 				print(azul+'# Usuario:'+cierre,userLogin)
 				print(azul+'# Contraseña:'+cierre,userPassword)
@@ -94,7 +97,7 @@ def program():
 		if(attempts != 0):
 			print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
 			print()
-			decision = input('¿Desea continuar en el programa? S / N: ').upper()
+			decision = input('¿Desea continuar en el programa? S / N \n\n> ').upper()
 			print()
 			clearconsole()
 			while (decision != 'N') and (decision != 'S'):
@@ -111,7 +114,7 @@ def program():
 			print("* Presione una tecla para cerrar sesion...")
 			msvcrt.getch()
 	clearconsole()
-	print('Gracias por su visita!!!')
+	print('¡Gracias por su visita!')
 	msvcrt.getch()
 
 #------------------------------------------------------------> EJECUCIÓN <-----------------------------------------------------------
