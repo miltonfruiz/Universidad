@@ -1,12 +1,12 @@
 #------------------------------------------------------------> UTILIDAD <------------------------------------------------------------
 
 import msvcrt
-clearconsole = lambda: print('\n' * 150)
+salto = lambda: print('\n' * 150)
 
 #------------------------------------------------------------> COLORES <--------------------------------------------------------------
 
 negro = '\033[30m'
-efc = '\033[1;37;41m'
+efc = '\033[3;37;41m'
 esc = '\033[3;4;31m'
 ec = '\033[3;31m'
 verde = '\033[32m'
@@ -24,49 +24,49 @@ def program():
 	users = 'admin@shopping.com'
 	password = '12345'
 	intentos = 3
-	clearconsole()
+	salto()
 	print(blanco+'>>> B I E N V E N I D O  <<<'+cierre)
 	print()
 	decision = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
 	print()
 	while (decision != 'N') and (decision != 'S'):
-		clearconsole()
+		salto()
 		print(blanco+'>>> B I E N V E N I D O  <<<'+cierre)
 		print()
 		print(efc+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
 		print()
 		decision = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
-	clearconsole()
+	salto()
 	while(decision != 'N' and intentos != 0):
 		print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
 		print()
 		userLogin = str(input('> Ingrese usuario: '))
 		while((len(userLogin) > 100) or (len(userLogin) < 7)):
-			clearconsole()
+			salto()
 			print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
 			print()
 			print(efc+'x ¡Usuario ingresado inválido. Mínimo 7 caracteres!'+cierre)
 			print()
 			userLogin = str(input('> Ingrese usuario: '))
-		clearconsole()
+		salto()
 		print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
 		print()
 		userPassword = str(input('> Ingrese contraseña: '))
 		while((len(userPassword) > 8) or (len(userPassword) < 3)):
-			clearconsole()
+			salto()
 			print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
 			print()
 			print(efc+'x ¡Contraseña ingresada inválida. Mínimo 4 dígitos!'+cierre)
 			print()
 			userPassword = str(input('> Ingrese contraseña: '))
-		clearconsole()
+		salto()
 		if(userLogin == users and userPassword == password):
 			print()
 			print('Los datos son correctos!')
 			print()
 			print(pcyan+'* Presione una tecla para continuar...'+cierre)
 			msvcrt.getch()
-			clearconsole()
+			salto()
 		else:
 			if((userLogin == users) and (userPassword != password)):
 				print()
@@ -95,28 +95,28 @@ def program():
 			print()
 			print(pcyan+'* Presione una tecla para continuar...'+cierre)
 			msvcrt.getch()
-			clearconsole()
+			salto()
 		if(intentos != 0):
 			print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
 			print()
 			decision = input('¿Desea continuar en el programa? S / N \n\n> ').upper()
 			print()
-			clearconsole()
+			salto()
 			while (decision != 'N') and (decision != 'S'):
 				print()
 				print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
 				print()
 				print(efc+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
 				print()
-				decision = input('¿Desea continuar en el programa?: ').upper()
-				clearconsole()
+				decision = input('¿Desea continuar en el programa? S / N \n\n> ').upper()
+				salto()
 		else:
 			print(efc+'x !Ha alcanzado el límite de intentos!'+cierre)
 			print('______________________________________')
 			print()
 			print(pcyan+'* Presione una tecla para cerrar sesion... '+cierre)
 			msvcrt.getch()
-	clearconsole()
+	salto()
 	print('¡Gracias por su visita!')
 	msvcrt.getch()
 
