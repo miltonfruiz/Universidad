@@ -18,9 +18,9 @@ blanco = '\033[4;37m'
 reset = '\033[39m'
 cierre = '\033[0;m'
 
-#-------------------------------------------------------> PROGRAMA PRINCIPAL <-------------------------------------------------------
+#-------------------------------------------------------> Programa Principal <-------------------------------------------------------
 
-def program():
+def PROGRAMA():
 	users = 'admin@shopping.com'
 	password = '12345'
 	intentos = 3
@@ -120,5 +120,47 @@ def program():
 	print('¡Gracias por su visita!')
 	msvcrt.getch()
 
-#------------------------------------------------------------> EJECUCIÓN <-----------------------------------------------------------
-program()
+#------------------------------------------------------->  Carga de Arreglos <-------------------------------------------------------
+
+'''type datos: array[0..99,0..3] of string;
+        locales: array[0..49,0..3] of string;
+        mapa: array[1..10,1..5] of integer;
+        cusuario: array[1..100] of integer;
+        clocal: array[1..50] of integer;
+        cantidad: array[1..3] of integer;
+        rubro: array[1..3] of string;
+	var D: datos;
+		l: locales;
+		m: mapa;
+		c: cantidad;
+		r: rubro;
+		cus: cusuario;
+    	clo: clocal;
+    	dec: char;
+    	int: integer;'''
+
+def cargoUsuarios():
+	global D
+	datos = [
+		['1','admin@shopping.com','12345','administrador'],
+		['2','','',''],
+		['3','','',''],
+		['4','localA@shopping.com','AAAA1111','dueñoLocal'],
+		['5','','',''],
+		['6','localB@shopping.com','BBBB2222','dueñoLocal'],
+		['7','','',''],
+		['8','','',''],
+		['9','unCliente@shopping.com','33xx33','cliente'],
+		['10','','',''],
+	  ]
+	D = ['']*10
+	for i in range(10):
+		D[i] = datos[i]
+
+def CARGO():
+	cargoUsuarios()
+
+#------------------------------------------------------------> Ejecución <-----------------------------------------------------------
+
+CARGO()
+PROGRAMA()
