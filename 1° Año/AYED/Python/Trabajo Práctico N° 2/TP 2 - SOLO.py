@@ -6,7 +6,7 @@ salto = lambda: print('\n' * 150)
 #------------------------------------------------------------> Colores <--------------------------------------------------------------
 
 negro = '\033[30m'
-efc = '\033[3;37;41m'
+efc = '\033[2;37;41m'
 esc = '\033[3;4;31m'
 ec = '\033[3;31m'
 fan = '\033[2;7;30;43m'
@@ -64,6 +64,40 @@ def admInvalida():
 	msvcrt.getch()
 	salto()
 
+def localOpcion():
+	print(blanco+'>>> 1. GESTIÓN DE LOCALES\n'+cierre)
+	print('        a) Crear local')
+	print('        b) Modificar local')
+	print('        c) Eliminar local')
+	print('        d) Mapa local')
+	print('        e) Volver\n')
+
+def admLocales():
+	localOpcion()
+	opcl = input('> Ingrese una opción: ').upper()
+	while(opcl != 'E'):
+		match opcl:
+			case 'A':
+				salto()
+				print('Crear localessssssssssssss')
+			case 'B':
+				salto()
+				print('Modificar localesssssssssss')
+			case 'C':
+				salto()
+				print('Eliminar localessssssssssssssssss')
+			case 'D':
+				salto()
+				print('Mapa de localllllllllllllll')
+			case 'E':
+				salto()
+				opcl = 'E'
+			case opcl:
+				print()
+				admInvalida()
+		localOpcion()
+		opcl = input('> Ingrese una opción: ').upper()
+
 #------------------------------------------------------> Módulo Administrador <------------------------------------------------------
 
 def ADMINISTRADOR():
@@ -73,21 +107,22 @@ def ADMINISTRADOR():
 		match opc:
 			case '1':
 				salto()
-				print(blanco+'>>> 1. Gestión de Locales\n'+cierre)
+				admLocales()
+				salto()
 			case '2':
 				salto()
-				print(blanco+'>>> 2. Crear cuentas de dueños de locales\n'+cierre)
+				print(blanco+'>>> 2. CREAR CUENTAS DE DUEÑOS DE LOCALES\n'+cierre)
 				admCartel()
 			case '3':
 				salto()
-				print(blanco+'>>> 3. Aprobar / Denegar solicitud de descuento\n'+cierre)
+				print(blanco+'>>> 3. APROBAR / DENEGAR SOLICITUD DE DESCUENTO\n'+cierre)
 				admCartel()
 			case '4':
 				salto()
-				print(blanco+'>>> 4. Gestión de Novedades\n'+cierre)
+				print(blanco+'>>> 4. GESTIÓN DE NOVEDADES\n'+cierre)
 			case '5':
 				salto()
-				print(blanco+'>>> 5. Reporte de utilización de descuentos\n'+cierre)
+				print(blanco+'>>> 5. REPORTE DE UTILIZACIÓN DE DESCUENTOS\n'+cierre)
 				admCartel()
 			case '0':
 				opc = '0'
@@ -115,7 +150,7 @@ def ACCESO():
 	print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
 	print()
 	contraseña = str(input('> Ingrese contraseña: '))
-	while((len(contraseña) > 8) or (len(contraseña) < 3)):
+	while((len(contraseña) > 8) or (len(contraseña) < 4)):
 		salto()
 		print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
 		print()
