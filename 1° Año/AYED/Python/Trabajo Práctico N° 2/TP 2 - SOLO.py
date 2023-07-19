@@ -36,7 +36,41 @@ def buscoUsuario(Usuario,Contraseña,X):
 		f = f + 1
 	return f
 
-#-----------------------------------------------> Módulos de Opciones de Administrador <---------------------------------------------
+
+#------------------------------------------------------------> Títulos <-------------------------------------------------------------
+
+def tituloIniciar():
+	print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
+	print()
+
+def tituloBienvenida():
+	salto()
+	print(blanco+'>>> B I E N V E N I D O  <<<'+cierre)
+	print()
+
+#-------------------------------------------------------> Opciones Inválidos <-------------------------------------------------------
+
+def usuarioInvalido():
+	salto()
+	tituloIniciar()
+	print(ec+'x !Debe contener mínimo 7 caracteres!'+cierre)
+	print()
+
+def contraseñaInvalida():
+	salto()
+	tituloIniciar()
+	print(ec+'x !Debe contener mínimo 4 caracteres!'+cierre)
+	print()
+
+def admInvalida():
+	salto()
+	print(ec+'x Opción ingresada inválida!'+cierre)
+	print()
+	print(pcyan+'* Presione una tecla para reintentar...'+cierre)
+	msvcrt.getch()
+	salto()
+
+#----------------------------------------------------> Opciones de Administrador <---------------------------------------------------
 
 def admOpcion():
 	print(blanco+'>>> MENÚ ADMINISTRADOR <<<\n'+cierre)
@@ -53,14 +87,6 @@ def admCartel():
 	print(fan+'/ / / / / / / / / / / / / / / / / / / / /'+cierre)
 	print()
 	print(pcyan+'* Presione una tecla para volver al menú administrador...'+cierre)
-	msvcrt.getch()
-	salto()
-
-def admInvalida():
-	salto()
-	print(efc+'x Opción ingresada inválida!'+cierre)
-	print()
-	print(pcyan+'* Presione una tecla para reintentar...'+cierre)
 	msvcrt.getch()
 	salto()
 
@@ -136,27 +162,17 @@ def ADMINISTRADOR():
 
 def ACCESO():
 	global usuario, contraseña, f, intentos, decision
-	print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
-	print()
+	tituloIniciar()
 	usuario = str(input('> Ingrese usuario: '))
 	while((len(usuario) > 100) or (len(usuario) < 7)):
-		salto()
-		print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
-		print()
-		print(efc+'x ¡Usuario ingresado inválido. Mínimo 7 caracteres!'+cierre)
-		print()
-		usuario = str(input('> Ingrese usuario: '))
+		usuarioInvalido()
+		usuario = str(input('> Ingrese usuario nuevamente: '))
 	salto()
-	print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
-	print()
+	tituloIniciar()
 	contraseña = str(input('> Ingrese contraseña: '))
 	while((len(contraseña) > 8) or (len(contraseña) < 4)):
-		salto()
-		print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
-		print()
-		print(efc+'x ¡Contraseña ingresada inválida. Mínimo 4 dígitos!'+cierre)
-		print()
-		contraseña = str(input('> Ingrese contraseña: '))
+		contraseñaInvalida()
+		contraseña = str(input('> Ingrese contraseña nuevamente: '))
 	salto()
 	f = buscoUsuario(usuario,contraseña,D)
 	if (D[f][1] == usuario and D[f][2] == contraseña):
@@ -200,15 +216,13 @@ def ACCESO():
 		msvcrt.getch()
 		salto()
 	if(intentos != 0):
-		print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
-		print()
+		tituloIniciar()
 		decision = input('¿Desea continuar en el programa? S / N \n\n> ').upper()
 		print()
 		salto()
 		while (decision != 'N') and (decision != 'S'):
 			print()
-			print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
-			print()
+			tituloIniciar()
 			print(efc+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
 			print()
 			decision = input('¿Desea continuar en el programa? S / N \n\n> ').upper()
@@ -226,15 +240,11 @@ def ACCESO():
 def PROGRAMA():
 	global intentos, decision
 	intentos = 3
-	salto()
-	print(blanco+'>>> B I E N V E N I D O  <<<'+cierre)
-	print()
+	tituloBienvenida()
 	decision = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
 	print()
 	while (decision != 'N') and (decision != 'S'):
-		salto()
-		print(blanco+'>>> B I E N V E N I D O  <<<'+cierre)
-		print()
+		tituloBienvenida()
 		print(efc+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
 		print()
 		decision = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
