@@ -306,12 +306,12 @@ def PROGRAMA():
 '''type datos: array[0..99,0..3] of string;
         locales: array[0..49,0..3] of string;
         mapa: array[1..10,1..5] of integer;
-        cusuario: array[1..100] of integer;
+        cusuario: array[0..49] of integer;
         clocal: array[1..50] of integer;
         cantidad: array[1..3] of integer;
         rubro: array[1..3] of string;
 	var D: datos;
-		l: locales;
+		L: locales;
 		m: mapa;
 		c: cantidad;
 		r: rubro;
@@ -332,9 +332,15 @@ def cargoUsuarios():
 	for i in range(4):
 		D[i] = datos[i]
 
+def cargoLocales():
+	global L
+	for f in range(50):
+		for c in range(4):
+			L[f][c] = ''
+
 def INICIO():
 	cargoUsuarios()
-
+	cargoLocales()
 #------------------------------------------------------------> Ejecución <-----------------------------------------------------------
 
 INICIO()
