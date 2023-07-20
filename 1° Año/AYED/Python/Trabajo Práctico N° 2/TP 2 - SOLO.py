@@ -86,7 +86,7 @@ def caracterInvalido():
 
 #-------------------------------------------------> Opciones de Gestión de Locales <-------------------------------------------------
 
-def CREAR():
+def muestroLocales():
 	global decs
 	opcionGestion('a','CREAR')
 	decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
@@ -96,6 +96,9 @@ def CREAR():
 		opcionGestion('a','CREAR')
 		decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
 	salto()
+
+def CREAR():
+	muestroLocales()
 	if(decs == 'S'):
 		print('Muestro el array!!!!!')
 	else:
