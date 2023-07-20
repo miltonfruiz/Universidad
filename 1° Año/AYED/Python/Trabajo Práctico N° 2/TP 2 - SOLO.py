@@ -20,13 +20,20 @@ blanco = '\033[4;37m'
 reset = '\033[39m'
 cierre = '\033[0;m'
 
-#-------------------------------------------------------> Usurios de prueba <--------------------------------------------------------
+#-------------------------------------------------------> Usurios de prueba <-----------------------------------------------------
 
 ''' 1 admin@shopping.com       12345      administrador
     4 localA@shopping.com      AAAA1111   dueñoLocal
 	6 localB@shopping.com      BBBB2222   dueñoLocal
 	9 unCliente@shopping.com   33xx33     cliente     '''
 
+#-----------------------------------------------------------> Extras <------------------------------------------------------------
+
+#funcion para opcines y titulos parametrizados
+def opcionGestion(opc,x):
+	print(blanco+'>>>',opc,')',x,'LOCAL'+cierre)
+	print()
+	return x
 
 #-----------------------------------------------------------> Búsquedas <------------------------------------------------------------
 
@@ -35,7 +42,6 @@ def buscoUsuario(Usuario,Contraseña,X):
 	while((X[f][1] != Usuario) and (X[f][2] != Contraseña) and (f != 3)):
 		f = f + 1
 	return f
-
 
 #------------------------------------------------------------> Títulos <-------------------------------------------------------------
 
@@ -46,10 +52,6 @@ def tituloIniciar():
 def tituloBienvenida():
 	salto()
 	print(blanco+'>>> B I E N V E N I D O  <<<'+cierre)
-	print()
-
-def tituloCrear():
-	print(blanco+'>>> a) CREAR LOCALES'+cierre)
 	print()
 
 #-------------------------------------------------------> Opciones Inválidos <-------------------------------------------------------
@@ -86,14 +88,18 @@ def caracterInvalido():
 
 def CREAR():
 	global decs
-	tituloCrear()
+	opcionGestion('a','CREAR')
 	decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
 	print()
 	while (decs != 'N') and (decs != 'S'):
-		tituloCrear()
 		caracterInvalido()
-		decs = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
+		opcionGestion('a','CREAR')
+		decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
 	salto()
+	if(decs == 'S'):
+		print('Muestro el array!!!!!')
+	else:
+		print('Creo local')
 
 #----------------------------------------------------> Opciones de Administrador <---------------------------------------------------
 
