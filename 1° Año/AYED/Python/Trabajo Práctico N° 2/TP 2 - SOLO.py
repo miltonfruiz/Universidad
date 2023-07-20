@@ -33,7 +33,19 @@ cierre = '\033[0;m'
 def opcionGestion(opc,x):
 	print(blanco+'>>>',opc,')',x,'LOCAL'+cierre)
 	print()
-	return x
+
+def desea(opcion,titulo,pregunta):
+	print('¿Desea',pregunta,'local? S / N')
+	print()
+	des = input('>').upper()
+	print()
+	while (des != 'N') and (des != 'S'):
+		caracterInvalido()
+		opcionGestion(opcion,titulo)
+		print('¿Desea',pregunta,'local? S / N')
+		print()
+		des = input('>').upper()
+		print()
 
 #-----------------------------------------------------------> Búsquedas <------------------------------------------------------------
 
@@ -96,13 +108,14 @@ def muestroLocales():
 		opcionGestion('a','CREAR')
 		decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
 	salto()
+	if(decs == 'S'):
+		print('Muestro el array!!!!!')
+
 
 def CREAR():
 	muestroLocales()
-	if(decs == 'S'):
-		print('Muestro el array!!!!!')
-	else:
-		print('Creo local')
+	opcionGestion('a','CREAR')
+	desea('a','CREAR','crear')
 
 #----------------------------------------------------> Opciones de Administrador <---------------------------------------------------
 
