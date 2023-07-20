@@ -48,6 +48,10 @@ def tituloBienvenida():
 	print(blanco+'>>> B I E N V E N I D O  <<<'+cierre)
 	print()
 
+def tituloCrear():
+	print(blanco+'>>> a) CREAR LOCALES'+cierre)
+	print()
+
 #-------------------------------------------------------> Opciones Inválidos <-------------------------------------------------------
 
 def usuarioInvalido():
@@ -68,6 +72,27 @@ def admInvalida():
 	print()
 	print(pcyan+'* Presione una tecla para reintentar...'+cierre)
 	msvcrt.getch()
+	salto()
+
+def caracterInvalido():
+	salto()
+	print(ec+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
+	print()
+	print(pcyan+'* Presione una tecla para reintentar...'+cierre)
+	msvcrt.getch()
+	salto()
+
+#-------------------------------------------------> Opciones de Gestión de Locales <-------------------------------------------------
+
+def CREAR():
+	global decs
+	tituloCrear()
+	decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
+	print()
+	while (decs != 'N') and (decs != 'S'):
+		tituloCrear()
+		caracterInvalido()
+		decs = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
 	salto()
 
 #----------------------------------------------------> Opciones de Administrador <---------------------------------------------------
@@ -105,7 +130,7 @@ def admLocales():
 		match opcl:
 			case 'A':
 				salto()
-				print('Crear localessssssssssssss')
+				CREAR()
 			case 'B':
 				salto()
 				print('Modificar localesssssssssss')
@@ -244,9 +269,8 @@ def PROGRAMA():
 	decision = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
 	print()
 	while (decision != 'N') and (decision != 'S'):
+		caracterInvalido()
 		tituloBienvenida()
-		print(efc+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
-		print()
 		decision = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
 	salto()
 	while(decision != 'N' and intentos != 0):
