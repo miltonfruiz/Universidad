@@ -1,7 +1,7 @@
 #------------------------------------------------------------> Utilidad <-------------------------------------------------------------
-
+import os
 import msvcrt
-salto = lambda: print('\n' * 150)
+salto = lambda: os.system('cls')
 
 #------------------------------------------------------------> Colores <--------------------------------------------------------------
 
@@ -35,6 +35,7 @@ def opcionGestion(opc,x):
 	print()
 
 def desea(opcion,titulo,pregunta):
+	global des
 	print('¿Desea',pregunta,'local? S / N')
 	print()
 	des = input('>').upper()
@@ -68,6 +69,18 @@ def tituloBienvenida():
 
 #-------------------------------------------------------> Opciones Inválidos <-------------------------------------------------------
 
+def continuar():
+	print()
+	print(pcyan+'* Presione una tecla para continuar...'+cierre)
+	msvcrt.getch()
+	salto()
+
+def reintentar():
+	print()
+	print(pcyan+'* Presione una tecla para reintentar...'+cierre)
+	msvcrt.getch()
+	salto()
+
 def usuarioInvalido():
 	salto()
 	tituloIniciar()
@@ -83,23 +96,17 @@ def contraseñaInvalida():
 def admInvalida():
 	salto()
 	print(ec+'x Opción ingresada inválida!'+cierre)
-	print()
-	print(pcyan+'* Presione una tecla para reintentar...'+cierre)
-	msvcrt.getch()
-	salto()
+	reintentar()
 
 def caracterInvalido():
 	salto()
 	print(ec+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
-	print()
-	print(pcyan+'* Presione una tecla para reintentar...'+cierre)
-	msvcrt.getch()
-	salto()
+	reintentar()
 
 #-------------------------------------------------> Opciones de Gestión de Locales <-------------------------------------------------
 
 def muestroLocales():
-	global decs
+	global decs,c
 	opcionGestion('a','CREAR')
 	decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
 	print()
@@ -108,14 +115,44 @@ def muestroLocales():
 		opcionGestion('a','CREAR')
 		decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
 	salto()
-	if(decs == 'S'):
-		print('Muestro el array!!!!!')
+	if(decs == 'S') and (L[0][0] != ''):
+		opcionGestion('a','CREAR')
+		print('NOMBRE       UBICACIÓN       RUBRO       ESTADO')
+		print('-----------------------------------------------')
+		for f in range(4):
+			print(L[f][0],'     ',L[f][1],'      ',L[f][2],'    ',L[f][3])
+		continuar()
+	else:
+		print(ec+'Por el momento no se han cargado locales.'+cierre)
+		continuar()
+	salto()
 
 
 def CREAR():
+	global tlocales
+	tlocales = 0
 	muestroLocales()
 	opcionGestion('a','CREAR')
 	desea('a','CREAR','crear')
+	while(des !='N') and (tlocales != 50):
+		salto()
+		opcionGestion('a','CREAR')
+		L[f][0] = input('> Ingrese nombre: ')
+		while((len(L[f][0]) > 100) or (len(L[f][0]) < 2)):
+			salto()
+			print(ec+'x !El nombre debe contener mínimo 3 caracteres!'+cierre)
+			reintentar()
+			opcionGestion('a','CREAR')
+			L[f][0]= input('> Ingrese nombre nuevamente: ')
+		L[f][1] = input('> Ingrese ubicación: ')
+		L[f][2] = input('> Ingrese rubro: ')
+		L[f][3] = input('> Ingrese estado: ')
+		salto()
+		desea('a','CREAR','crear')
+		salto()
+	salto()
+
+
 
 #----------------------------------------------------> Opciones de Administrador <---------------------------------------------------
 
@@ -334,13 +371,14 @@ def cargoUsuarios():
 
 def cargoLocales():
 	global L
-	for f in range(50):
-		for c in range(4):
-			L[f][c] = ''
+	L = ['']*4
+	for f in range(4):
+		L[f] = ['']*4
 
 def INICIO():
 	cargoUsuarios()
 	cargoLocales()
+
 #------------------------------------------------------------> Ejecución <-----------------------------------------------------------
 
 INICIO()
