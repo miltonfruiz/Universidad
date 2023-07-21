@@ -105,6 +105,17 @@ def caracterInvalido():
 
 #-------------------------------------------------> Opciones de Gestión de Locales <-------------------------------------------------
 
+def nombre(letra,opcion,cadena,minimo):
+	salto()
+	opcionGestion(letra,opcion)
+	L[f][0] = input('> Ingrese nombre: ')
+	while((len(L[f][0]) > 100) or (len(L[f][0]) < 2)):
+		salto()
+		print(ec+'x ',cadena,'debe contener mínimo',minimo,'caracteres!'+cierre)
+		reintentar()
+		opcionGestion(letra,opcion)
+		L[f][0]= input('> Ingrese nombre nuevamente: ')
+
 def muestroLocales():
 	global decs,c
 	opcionGestion('a','CREAR')
@@ -127,7 +138,6 @@ def muestroLocales():
 		continuar()
 	salto()
 
-
 def CREAR():
 	global tlocales
 	tlocales = 0
@@ -135,15 +145,7 @@ def CREAR():
 	opcionGestion('a','CREAR')
 	desea('a','CREAR','crear')
 	while(des !='N') and (tlocales != 50):
-		salto()
-		opcionGestion('a','CREAR')
-		L[f][0] = input('> Ingrese nombre: ')
-		while((len(L[f][0]) > 100) or (len(L[f][0]) < 2)):
-			salto()
-			print(ec+'x !El nombre debe contener mínimo 3 caracteres!'+cierre)
-			reintentar()
-			opcionGestion('a','CREAR')
-			L[f][0]= input('> Ingrese nombre nuevamente: ')
+		nombre('a','CREAR','!El nombre','3')
 		L[f][1] = input('> Ingrese ubicación: ')
 		L[f][2] = input('> Ingrese rubro: ')
 		L[f][3] = input('> Ingrese estado: ')
