@@ -38,14 +38,14 @@ def desea(opcion,titulo,pregunta):
 	global des
 	print('¿Desea',pregunta,'local? S / N')
 	print()
-	des = input('>').upper()
+	des = input('> ').upper()
 	print()
 	while (des != 'N') and (des != 'S'):
 		caracterInvalido()
 		opcionGestion(opcion,titulo)
 		print('¿Desea',pregunta,'local? S / N')
 		print()
-		des = input('>').upper()
+		des = input('> ').upper()
 		print()
 
 #-----------------------------------------------------------> Búsquedas <------------------------------------------------------------
@@ -53,6 +53,12 @@ def desea(opcion,titulo,pregunta):
 def buscoUsuario(Usuario,Contraseña,X):
 	f = 0
 	while((X[f][1] != Usuario) and (X[f][2] != Contraseña) and (f != 3)):
+		f = f + 1
+	return f
+
+def buscoNombre(X,nombre):
+	f = 0
+	while((X[f][0] != nombre) and (f != 3)):
 		f = f + 1
 	return f
 
@@ -105,16 +111,17 @@ def caracterInvalido():
 
 #-------------------------------------------------> Opciones de Gestión de Locales <-------------------------------------------------
 
-def nombre(letra,opcion,cadena,minimo):
+def valNombre(letra,opcion,cadena,minimo):
+	global nombre
 	salto()
 	opcionGestion(letra,opcion)
-	L[f][0] = input('> Ingrese nombre: ')
-	while((len(L[f][0]) > 100) or (len(L[f][0]) < 2)):
+	nombre = input('> Ingrese nombre: ')
+	while((len(nombre) > 100) or (len(nombre) < 2)):
 		salto()
 		print(ec+'x ',cadena,'debe contener mínimo',minimo,'caracteres!'+cierre)
 		reintentar()
 		opcionGestion(letra,opcion)
-		L[f][0]= input('> Ingrese nombre nuevamente: ')
+		nombre = input('> Ingrese nombre nuevamente: ')
 
 def muestroLocales():
 	global decs,c
@@ -133,28 +140,34 @@ def muestroLocales():
 		for f in range(4):
 			print(L[f][0],'     ',L[f][1],'      ',L[f][2],'    ',L[f][3])
 		continuar()
-	else:
-		print(ec+'Por el momento no se han cargado locales.'+cierre)
-		continuar()
+	elif(decs == 'S') and (L[0][0] == ''):
+			print(ec+'Por el momento no se han cargado locales.'+cierre)
+			continuar()
 	salto()
 
 def CREAR():
-	global tlocales
-	tlocales = 0
+	global tl
+	tl = 0
 	muestroLocales()
 	opcionGestion('a','CREAR')
 	desea('a','CREAR','crear')
-	while(des !='N') and (tlocales != 50):
-		nombre('a','CREAR','!El nombre','3')
-		L[f][1] = input('> Ingrese ubicación: ')
-		L[f][2] = input('> Ingrese rubro: ')
-		L[f][3] = input('> Ingrese estado: ')
-		salto()
+	while(des !='N') and (tl != 50):
+		valNombre('a','CREAR','!El nombre','3')
+		n = buscoNombre(L,nombre)
+		if(L[n][0] != nombre):
+			L[tl][0] = nombre
+			L[tl][1] = input('> Ingrese ubicación: ')
+			L[tl][2] = input('> Ingrese rubro: ')
+			L[tl][3] = input('> Ingrese estado: ')
+			tl = tl + 1
+			salto()
+		else:
+			print()
+			print(ec+'¡Ese nombre ya existe!'+cierre)
+			continuar()
 		desea('a','CREAR','crear')
 		salto()
 	salto()
-
-
 
 #----------------------------------------------------> Opciones de Administrador <---------------------------------------------------
 
