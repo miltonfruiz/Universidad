@@ -1,4 +1,5 @@
 #------------------------------------------------------------> Utilidad <-------------------------------------------------------------
+
 import os
 import msvcrt
 salto = lambda: os.system('cls')
@@ -111,17 +112,18 @@ def caracterInvalido():
 
 #-------------------------------------------------> Opciones de Gestión de Locales <-------------------------------------------------
 
-def valNombre(letra,opcion,cadena,minimo):
-	global nombre
+def validoNombre(letra,opcion,cadena,minimo,X):
+	global nombre, n
 	salto()
 	opcionGestion(letra,opcion)
 	nombre = input('> Ingrese nombre: ')
-	while((len(nombre) > 100) or (len(nombre) < 2)):
+	while((len(nombre) > 50) or (len(nombre) < 2)):
 		salto()
 		print(ec+'x ',cadena,'debe contener mínimo',minimo,'caracteres!'+cierre)
 		reintentar()
 		opcionGestion(letra,opcion)
 		nombre = input('> Ingrese nombre nuevamente: ')
+	n = buscoNombre(X,nombre)
 
 def muestroLocales():
 	global decs,c
@@ -145,20 +147,18 @@ def muestroLocales():
 			continuar()
 	salto()
 
-def CREAR():
+def CREAR(X):
 	global tl
-	tl = 0
 	muestroLocales()
 	opcionGestion('a','CREAR')
 	desea('a','CREAR','crear')
 	while(des !='N') and (tl != 50):
-		valNombre('a','CREAR','!El nombre','3')
-		n = buscoNombre(L,nombre)
-		if(L[n][0] != nombre):
-			L[tl][0] = nombre
-			L[tl][1] = input('> Ingrese ubicación: ')
-			L[tl][2] = input('> Ingrese rubro: ')
-			L[tl][3] = input('> Ingrese estado: ')
+		validoNombre('a','CREAR','!El nombre','3',L)
+		if(X[n][0] != nombre):
+			X[tl][0] = nombre
+			validoUbicacion('a','CREAR','!La ubicación','2',L)
+			X[tl][2] = input('> Ingrese rubro: ')
+			X[tl][3] = input('> Ingrese estado: ')
 			tl = tl + 1
 			salto()
 		else:
@@ -204,7 +204,7 @@ def admLocales():
 		match opcl:
 			case 'A':
 				salto()
-				CREAR()
+				CREAR(L)
 			case 'B':
 				salto()
 				print('Modificar localesssssssssss')
@@ -333,11 +333,11 @@ def ACCESO():
 		print(pcyan+'* Presione una tecla para cerrar sesion... '+cierre)
 		msvcrt.getch()
 
-
 #-------------------------------------------------------> Programa Principal <-------------------------------------------------------
 
 def PROGRAMA():
-	global intentos, decision
+	global intentos, decision, tl
+	tl = 0
 	intentos = 3
 	tituloBienvenida()
 	decision = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
