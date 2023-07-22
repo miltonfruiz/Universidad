@@ -125,6 +125,17 @@ def validoNombre(letra,opcion,cadena,minimo,X):
 		nombre = input('> Ingrese nombre nuevamente: ')
 	n = buscoNombre(X,nombre)
 
+def validoUbicacion(letra,opcion,cadena,minimo,X):
+	salto()
+	opcionGestion(letra,opcion)
+	X[tl][1] = input('> Ingrese ubicación: ')
+	while((len(X[tl][1]) > 50) or (len(X[tl][1]) < 1)):
+		salto()
+		print(ec+'x ',cadena,'debe contener mínimo',minimo,'caracteres!'+cierre)
+		reintentar()
+		opcionGestion(letra,opcion)
+		X[tl][1] = input('> Ingrese ubicación nuevamente: ')
+
 def muestroLocales():
 	global decs,c
 	opcionGestion('a','CREAR')
