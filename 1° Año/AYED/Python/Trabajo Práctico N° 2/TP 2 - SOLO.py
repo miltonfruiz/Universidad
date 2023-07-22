@@ -125,7 +125,7 @@ def validoNombre(letra,opcion,cadena,minimo,X):
 		nombre = input('> Ingrese nombre nuevamente: ')
 	n = buscoNombre(X,nombre)
 
-def validoUbicacion(letra,opcion,cadena,minimo,X):
+def validoUbicación(letra,opcion,cadena,minimo,X):
 	salto()
 	opcionGestion(letra,opcion)
 	X[tl][1] = input('> Ingrese ubicación: ')
@@ -135,6 +135,17 @@ def validoUbicacion(letra,opcion,cadena,minimo,X):
 		reintentar()
 		opcionGestion(letra,opcion)
 		X[tl][1] = input('> Ingrese ubicación nuevamente: ')
+
+def validoRubro(letra,opcion,cadena,X):
+	salto()
+	opcionGestion(letra,opcion)
+	X[tl][2] = input('> Ingrese rubro: ')
+	while(X[tl][2] != 'comida') and (X[tl][2] != 'indumentaria') and (X[tl][2] != 'perfumeria'):
+		salto()
+		print(ec+'x ',cadena,'ingresado deber comida, indumentria o perfumeria!'+cierre)
+		reintentar()
+		opcionGestion(letra,opcion)
+		X[tl][2] = input('> Ingrese rubro nuevamente: ')
 
 def muestroLocales():
 	global decs,c
@@ -164,11 +175,11 @@ def CREAR(X):
 	opcionGestion('a','CREAR')
 	desea('a','CREAR','crear')
 	while(des !='N') and (tl != 50):
-		validoNombre('a','CREAR','!El nombre','3',L)
+		validoNombre('a','CREAR','!El nombre','3',X)
 		if(X[n][0] != nombre):
 			X[tl][0] = nombre
-			validoUbicacion('a','CREAR','!La ubicación','2',L)
-			X[tl][2] = input('> Ingrese rubro: ')
+			validoUbicación('a','CREAR','!La ubicación','2',X)
+			validoRubro('a','CREAR','!El rubro',X)
 			X[tl][3] = input('> Ingrese estado: ')
 			tl = tl + 1
 			salto()
@@ -176,6 +187,7 @@ def CREAR(X):
 			print()
 			print(ec+'¡Ese nombre ya existe!'+cierre)
 			continuar()
+		opcionGestion('a','CREAR')
 		desea('a','CREAR','crear')
 		salto()
 	salto()
