@@ -199,7 +199,7 @@ def CREAR(X,Z):
 			X[tl][0] = nombre
 			validoUbicación('a','CREAR','!La ubicación','2',X)
 			validoRubro('a','CREAR','!El rubro',X)
-			validoCodigo('a','CREAR','El código','0',Z)
+			validoCodigo('a','CREAR','!El código','0',Z)
 			if(Z[c][0] == codigo) and (Z[c][3] == 'dueñoLocal'):
 				salto()
 				X[tl][3] = 'A'
@@ -207,6 +207,7 @@ def CREAR(X,Z):
 				print('¡Los datos se cargaron correctamente!')
 				continuar()
 			else:
+				salto()
 				print('Ese codigo no pertenece al dueño de un local!')
 				continuar()
 		else:
@@ -407,15 +408,14 @@ def PROGRAMA():
 '''type datos: array[0..99,0..3] of string;
         locales: array[0..49,0..3] of string;
         mapa: array[1..10,1..5] of integer;
-        cusuario: array[0..49] of integer;
         clocal: array[1..50] of integer;
-        cantidad: array[1..3] of integer;
-        rubro: array[1..3] of string;
+        trubros: array[1..3] of integer;
+        rubros: array[1..3] of string;
 	var D: datos;
 		L: locales;
 		m: mapa;
-		c: cantidad;
-		r: rubro;
+		TR: trubros;
+		R: rubros;
 		cus: cusuario;
     	clo: clocal;
     	dec: char;
@@ -438,6 +438,10 @@ def cargoLocales():
 	L = ['']*4
 	for f in range(4):
 		L[f] = ['']*4
+
+def totalRubros():
+	global TR
+	TR = [0]*3
 
 def INICIO():
 	cargoUsuarios()
