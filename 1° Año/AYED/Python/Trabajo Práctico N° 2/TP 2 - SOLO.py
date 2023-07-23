@@ -63,6 +63,12 @@ def buscoNombre(X,nombre):
 		f = f + 1
 	return f
 
+def buscoCodigo(X,codigo):
+	f = 0
+	while((X[f][0] != codigo) and (f != 3)):
+		f = f + 1
+	return f
+
 #------------------------------------------------------------> Títulos <-------------------------------------------------------------
 
 def tituloIniciar():
@@ -147,6 +153,19 @@ def validoRubro(letra,opcion,cadena,X):
 		opcionGestion(letra,opcion)
 		X[tl][2] = input('> Ingrese rubro nuevamente: ')
 
+def validoCodigo(letra,opcion,cadena,minimo,X):
+	global codigo, c
+	salto()
+	opcionGestion(letra,opcion)
+	codigo = input('> Ingrese codigo: ')
+	while(codigo == '0'):
+		salto()
+		print(ec+'x ',cadena,'ingresado debe ser distinto de',minimo,+cierre)
+		reintentar()
+		opcionGestion(letra,opcion)
+		codigo = input('> Ingrese codigo nuevamente: ')
+	c = buscoCodigo(X,codigo)
+
 def muestroLocales():
 	global decs,c
 	opcionGestion('a','CREAR')
@@ -169,7 +188,7 @@ def muestroLocales():
 			continuar()
 	salto()
 
-def CREAR(X):
+def CREAR(X,Z):
 	global tl
 	muestroLocales()
 	opcionGestion('a','CREAR')
@@ -180,9 +199,16 @@ def CREAR(X):
 			X[tl][0] = nombre
 			validoUbicación('a','CREAR','!La ubicación','2',X)
 			validoRubro('a','CREAR','!El rubro',X)
-			X[tl][3] = input('> Ingrese estado: ')
-			tl = tl + 1
-			salto()
+			validoCodigo('a','CREAR','El código','0',Z)
+			if(Z[c][0] == codigo) and (Z[c][3] == 'dueñoLocal'):
+				salto()
+				X[tl][3] = 'A'
+				tl = tl + 1
+				print('¡Los datos se cargaron correctamente!')
+				continuar()
+			else:
+				print('Ese codigo no pertenece al dueño de un local!')
+				continuar()
 		else:
 			print()
 			print(ec+'¡Ese nombre ya existe!'+cierre)
@@ -227,7 +253,7 @@ def admLocales():
 		match opcl:
 			case 'A':
 				salto()
-				CREAR(L)
+				CREAR(L,D)
 			case 'B':
 				salto()
 				print('Modificar localesssssssssss')
