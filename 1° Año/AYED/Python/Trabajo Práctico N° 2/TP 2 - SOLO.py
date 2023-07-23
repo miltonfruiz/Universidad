@@ -166,6 +166,18 @@ def validoCodigo(letra,opcion,cadena,minimo,X):
 		codigo = input('> Ingrese codigo nuevamente: ')
 	c = buscoCodigo(X,codigo)
 
+def sumoLocal(X,tipo,Y):
+	match tipo:
+		case 'comida':
+			Y[0] = 'comida'
+			X[0] = X[0] + 1
+		case 'indumentaria':
+			Y[1] = 'indumentaria'
+			X[1] = X[1] + 1
+		case 'perfumeria':
+			Y[2] = 'perfumeria'
+			X[2] = X[2] + 1
+
 def muestroLocales():
 	global decs,c
 	opcionGestion('a','CREAR')
@@ -188,7 +200,7 @@ def muestroLocales():
 			continuar()
 	salto()
 
-def CREAR(X,Z):
+def CREAR(X,Z,Y,W):
 	global tl
 	muestroLocales()
 	opcionGestion('a','CREAR')
@@ -203,8 +215,9 @@ def CREAR(X,Z):
 			if(Z[c][0] == codigo) and (Z[c][3] == 'dueñoLocal'):
 				salto()
 				X[tl][3] = 'A'
-				tl = tl + 1
+				sumoLocal(Y,Z[tl][2],W)
 				print('¡Los datos se cargaron correctamente!')
+				tl = tl + 1
 				continuar()
 			else:
 				salto()
@@ -254,7 +267,7 @@ def admLocales():
 		match opcl:
 			case 'A':
 				salto()
-				CREAR(L,D)
+				CREAR(L,D,TR,R)
 			case 'B':
 				salto()
 				print('Modificar localesssssssssss')
