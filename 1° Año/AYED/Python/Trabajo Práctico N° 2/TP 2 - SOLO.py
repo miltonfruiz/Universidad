@@ -439,13 +439,19 @@ def cargoLocales():
 	for f in range(4):
 		L[f] = ['']*4
 
-def totalRubros():
+def cargoTotalRubros():
 	global TR
 	TR = [0]*3
+
+def cargoRubros():
+	global R
+	R = ['']*3
 
 def INICIO():
 	cargoUsuarios()
 	cargoLocales()
+	cargoTotalRubros()
+	cargoRubros()
 
 #------------------------------------------------------------> Ejecución <-----------------------------------------------------------
 
