@@ -30,7 +30,7 @@ cierre = '\033[0;m'
 
 #-----------------------------------------------------------> Extras <------------------------------------------------------------
 
-#funcion para opcines y titulos parametrizados
+#funcion para opciones y titulos parametrizados
 def opcionGestion(opc,x):
 	print(blanco+'>>>',opc,')',x,'LOCAL'+cierre)
 	print()
@@ -116,6 +116,21 @@ def caracterInvalido():
 	print(ec+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
 	reintentar()
 
+#---------------------------------------------------------> Ordenamientos <----------------------------------------------------------
+
+def ordenoCantidad(Y,W):
+	aux1 = 0
+	aux2 = 0
+	for i in range(2):
+		for j in range(i+1,3):
+			if(Y[i] < Y[j]):
+				aux1 = Y[i]
+				Y[i] = Y[j]
+				Y[j] = aux1
+				aux2 = W[i]
+				W[i] = W[j]
+				W[j] = aux2
+
 #-------------------------------------------------> Opciones de Gestión de Locales <-------------------------------------------------
 
 def validoNombre(letra,opcion,cadena,minimo,X):
@@ -166,17 +181,28 @@ def validoCodigo(letra,opcion,cadena,minimo,X):
 		codigo = input('> Ingrese codigo nuevamente: ')
 	c = buscoCodigo(X,codigo)
 
-def sumoLocal(X,tipo,Y):
+def sumoLocal(Y,tipo,W):
 	match tipo:
 		case 'comida':
-			Y[0] = 'comida'
-			X[0] = X[0] + 1
+			W[0] = 'comida'
+			Y[0] = Y[0] + 1
 		case 'indumentaria':
-			Y[1] = 'indumentaria'
-			X[1] = X[1] + 1
+			W[1] = 'indumentaria'
+			Y[1] = Y[1] + 1
 		case 'perfumeria':
-			Y[2] = 'perfumeria'
-			X[2] = X[2] + 1
+			W[2] = 'perfumeria'
+			Y[2] = Y[2] + 1
+	ordenoCantidad(Y,W)
+	muestroDescendente(Y,W)
+
+def muestroDescendente(Y,W):
+	opcionGestion('a','CREAR')
+	print('CANTIDAD       RUBRO')
+	print('-------------------------------------')
+	for i  in range(3):
+		if(Y[i] != 0):
+			print('   ',Y[i],'       ',W[i])
+	print()
 
 def muestroLocales():
 	global decs,c
@@ -192,8 +218,9 @@ def muestroLocales():
 		opcionGestion('a','CREAR')
 		print('NOMBRE       UBICACIÓN       RUBRO       ESTADO')
 		print('-----------------------------------------------')
-		for f in range(4):
-			print(L[f][0],'     ',L[f][1],'      ',L[f][2],'    ',L[f][3])
+		for f in range(50):
+			if(L[f][0] != ''):
+				print(L[f][0],'     ',L[f][1],'      ',L[f][2],'    ',L[f][3])
 		continuar()
 	elif(decs == 'S') and (L[0][0] == ''):
 			print(ec+'Por el momento no se han cargado locales.'+cierre)
@@ -215,7 +242,7 @@ def CREAR(X,Z,Y,W):
 			if(Z[c][0] == codigo) and (Z[c][3] == 'dueñoLocal'):
 				salto()
 				X[tl][3] = 'A'
-				sumoLocal(Y,Z[tl][2],W)
+				sumoLocal(Y,X[tl][2],W)
 				print('¡Los datos se cargaron correctamente!')
 				tl = tl + 1
 				continuar()
@@ -448,9 +475,9 @@ def cargoUsuarios():
 
 def cargoLocales():
 	global L
-	L = ['']*4
-	for f in range(4):
-		L[f] = ['']*4
+	L = ['']*51
+	for f in range(51):
+		L[f] = ['']*51
 
 def cargoTotalRubros():
 	global TR
