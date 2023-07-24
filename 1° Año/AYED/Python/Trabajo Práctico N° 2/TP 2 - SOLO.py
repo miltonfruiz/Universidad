@@ -70,6 +70,12 @@ def buscoCodigo(X,codigo):
 		f = f + 1
 	return f
 
+def buscoRubro(X,rubro):
+	f = 0
+	while((X[f] != rubro) and (f != 2)):
+		f = f + 1
+	return f
+
 #------------------------------------------------------------> Títulos <-------------------------------------------------------------
 
 def tituloIniciar():
@@ -120,10 +126,8 @@ def caracterInvalido():
 #---------------------------------------------------------> Ordenamientos <----------------------------------------------------------
 
 def ordenoCantidad(Y,W):
-	aux1 = 0
-	aux2 = 0
-	for i in range(0,1):
-		for j in range(i+1,2):
+	for i in range(0,2):
+		for j in range(i+1,3):
 			if(Y[i] < Y[j]):
 				aux1 = Y[i]
 				Y[i] = Y[j]
@@ -161,13 +165,13 @@ def validoUbicación(letra,opcion,cadena,minimo,X):
 def validoRubro(letra,opcion,cadena,X):
 	salto()
 	opcionGestion(letra,opcion)
-	X[tl][2] = input('> Ingrese rubro: ')
-	while(X[tl][2] != 'comida') and (X[tl][2] != 'indumentaria') and (X[tl][2] != 'perfumeria'):
+	X[tl][2] = input('> Ingrese rubro: ').capitalize()
+	while(X[tl][2] != 'Comida') and (X[tl][2] != 'Indumentaria') and (X[tl][2] != 'Perfumeria'):
 		salto()
-		print(ec+'x ',cadena,'ingresado deber comida, indumentria o perfumeria!'+cierre)
+		print(ec+'x ',cadena,'ingresado debe ser comida, indumentria o perfumeria!'+cierre)
 		reintentar()
 		opcionGestion(letra,opcion)
-		X[tl][2] = input('> Ingrese rubro nuevamente: ')
+		X[tl][2] = input('> Ingrese rubro nuevamente: ').capitalize()
 
 def validoCodigo(letra,opcion,cadena,minimo,X):
 	global codigo, c
@@ -182,28 +186,26 @@ def validoCodigo(letra,opcion,cadena,minimo,X):
 		codigo = input('> Ingrese codigo nuevamente: ')
 	c = buscoCodigo(X,codigo)
 
-def sumoLocal(Y,tipo,W):
-	match tipo:
-		case 'comida':
-			W[0] = 'comida'
-			Y[0] = Y[0] + 1
-		case 'indumentaria':
-			W[1] = 'indumentaria'
-			Y[1] = Y[1] + 1
-		case 'perfumeria':
-			W[2] = 'perfumeria'
-			Y[2] = Y[2] + 1
-	ordenoCantidad(Y,W)
-	muestroDescendente(Y,W)
-
 def muestroDescendente(Y,W):
 	opcionGestion('a','CREAR')
-	print('CANTIDAD            RUBRO')
-	print('-------------------------------------')
-	for i  in range(0,2):
+	print('     CANTIDAD              RUBRO')
+	print(' ------------------------------------')
+	for i  in range(3):
 		if(Y[i] != 0):
-			print('   ',Y[i],'          ',W[i])
+			print('       ',Y[i],'             ',W[i])
 	print()
+
+def sumoLocal(Y,W,tipo):
+	t = buscoRubro(W,tipo)
+	match W[t]:
+		case 'Comida':
+			Y[t] = Y[t] + 1
+		case 'Indumentaria':
+			Y[t] = Y[t] + 1
+		case 'Perfumeria':
+			Y[t] = Y[t] + 1
+	ordenoCantidad(Y,W)
+	muestroDescendente(Y,W)
 
 def muestroLocales():
 	global decs,c
@@ -229,6 +231,7 @@ def muestroLocales():
 	salto()
 
 def CREAR(X,Z,Y,W):
+	global tl
 	muestroLocales()
 	opcionGestion('a','CREAR')
 	desea('a','CREAR','crear')
@@ -242,7 +245,7 @@ def CREAR(X,Z,Y,W):
 			if(Z[c][0] == codigo) and (Z[c][3] == 'dueñoLocal'):
 				salto()
 				X[tl][3] = 'A'
-				sumoLocal(Y,X[tl][2],W)
+				sumoLocal(Y,W,X[tl][2])
 				print(cvc+'¡Los datos se cargaron correctamente!'+cierre)
 				continuar()
 				tl = tl + 1
@@ -487,7 +490,7 @@ def cargoTotalRubros():
 
 def cargoRubros():
 	global R
-	R = ['']*3
+	R = ['Comida','Indumentaria','Perfumeria']
 
 def INICIO():
 	cargoUsuarios()
