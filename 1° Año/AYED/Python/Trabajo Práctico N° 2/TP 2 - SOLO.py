@@ -266,29 +266,16 @@ def CREAR(X,Z,Y,W):
 
 def admOpcion():
 	print(blanco+'>>> MENÚ ADMINISTRADOR <<<\n'+cierre)
-	print('1. Gestión de Locales')
-	print('2. Crear cuentas de dueños de locales')
-	print('3. Aprobar / Denegar solicitud de descuento')
-	print('4. Gestión de Novedades')
-	print('5. Reporte de utilización de descuentos')
-	print('0. Salir\n')
+	print('1. Gestión de Locales\n''2. Crear cuentas de dueños de locales\n''3. Aprobar / Denegar solicitud de descuento\n''4. Gestión de Novedades\n''5. Reporte de utilización de descuentos\n''0. Salir\n')
 
 def admCartel():
-	print(cursiva+'En construcción...'+cierre)
-	print()
-	print(fan+'/ / / / / / / / / / / / / / / / / / / / /'+cierre)
-	print()
-	print(pcyan+'* Presione una tecla para volver al menú administrador...'+cierre)
+	print(cursiva+'En construcción...'+cierre+'\n'+fan+'\n/ / / / / / / / / / / / / / / / / / / / /'+cierre+'\n'+pcyan+'\n* Presione una tecla para volver al menú administrador...'+cierre)
 	msvcrt.getch()
 	salto()
 
 def localOpcion():
 	print(blanco+'>>> 1. GESTIÓN DE LOCALES\n'+cierre)
-	print('        a) Crear local')
-	print('        b) Modificar local')
-	print('        c) Eliminar local')
-	print('        d) Mapa local')
-	print('        e) Volver\n')
+	print('       a) Crear local\n''       b) Modificar local\n''       c) Eliminar local\n''       d) Mapa local\n''       e) Volver\n')
 
 def admLocales():
 	localOpcion()
