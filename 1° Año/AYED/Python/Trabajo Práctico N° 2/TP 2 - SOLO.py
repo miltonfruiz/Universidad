@@ -11,6 +11,7 @@ efc = '\033[2;37;41m'
 esc = '\033[3;4;31m'
 ec = '\033[3;31m'
 fan = '\033[2;7;30;43m'
+cvc = '\033[3;32m'
 cursiva = '\033[3m'
 verde = '\033[32m'
 amarillo = '\033[4;33m'
@@ -121,8 +122,8 @@ def caracterInvalido():
 def ordenoCantidad(Y,W):
 	aux1 = 0
 	aux2 = 0
-	for i in range(2):
-		for j in range(i+1,3):
+	for i in range(0,1):
+		for j in range(i+1,2):
 			if(Y[i] < Y[j]):
 				aux1 = Y[i]
 				Y[i] = Y[j]
@@ -197,11 +198,11 @@ def sumoLocal(Y,tipo,W):
 
 def muestroDescendente(Y,W):
 	opcionGestion('a','CREAR')
-	print('CANTIDAD       RUBRO')
+	print('CANTIDAD            RUBRO')
 	print('-------------------------------------')
-	for i  in range(3):
+	for i  in range(0,2):
 		if(Y[i] != 0):
-			print('   ',Y[i],'       ',W[i])
+			print('   ',Y[i],'          ',W[i])
 	print()
 
 def muestroLocales():
@@ -228,7 +229,6 @@ def muestroLocales():
 	salto()
 
 def CREAR(X,Z,Y,W):
-	global tl
 	muestroLocales()
 	opcionGestion('a','CREAR')
 	desea('a','CREAR','crear')
@@ -243,9 +243,9 @@ def CREAR(X,Z,Y,W):
 				salto()
 				X[tl][3] = 'A'
 				sumoLocal(Y,X[tl][2],W)
-				print('¡Los datos se cargaron correctamente!')
-				tl = tl + 1
+				print(cvc+'¡Los datos se cargaron correctamente!'+cierre)
 				continuar()
+				tl = tl + 1
 			else:
 				salto()
 				print('Ese codigo no pertenece al dueño de un local!')
@@ -368,6 +368,8 @@ def ACCESO():
 		print()
 		match D[f][3]:
 			case 'administrador':
+				print(cvc+'¡Verificación de Administrador exitosa!'+cierre)
+				continuar()
 				ADMINISTRADOR()
 			case 'dueñoLocal':
 				print('DUEÑO LOCAL')
@@ -477,7 +479,7 @@ def cargoLocales():
 	global L
 	L = ['']*51
 	for f in range(51):
-		L[f] = ['']*51
+		L[f] = ['']*4
 
 def cargoTotalRubros():
 	global TR
