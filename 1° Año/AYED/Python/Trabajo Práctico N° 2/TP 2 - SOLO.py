@@ -74,13 +74,11 @@ def buscoRubro(X,rubro):
 #------------------------------------------------------------> Títulos <-------------------------------------------------------------
 
 def tituloIniciar():
-	print(blanco+'>>> INICIAR SESIÓN <<<'+cierre)
-	print()
+	print(blanco+'>>> INICIAR SESIÓN <<<'+cierre+'\n')
 
 def tituloBienvenida():
 	salto()
-	print(blanco+'>>> B I E N V E N I D O  <<<'+cierre)
-	print()
+	print(blanco+'>>> B I E N V E N I D O  <<<'+cierre+'\n')
 
 #-------------------------------------------------------> Opciones Inválidos <-------------------------------------------------------
 
