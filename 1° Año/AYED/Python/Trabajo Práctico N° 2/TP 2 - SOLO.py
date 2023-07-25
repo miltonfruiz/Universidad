@@ -88,12 +88,6 @@ def presione(accion):
 	msvcrt.getch()
 	salto()
 
-def reintentar():
-	print()
-	print(pcyan+'* Presione una tecla para reintentar...'+cierre)
-	msvcrt.getch()
-	salto()
-
 def usuarioInvalido():
 	salto()
 	tituloIniciar()
@@ -107,12 +101,12 @@ def contraseñaInvalida():
 def admInvalida():
 	salto()
 	print(ec+'x Opción ingresada inválida!'+cierre)
-	reintentar()
+	presione('reintentar')
 
 def caracterInvalido():
 	salto()
 	print(ec+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
-	reintentar()
+	presione('reintentar')
 
 #---------------------------------------------------------> Ordenamientos <----------------------------------------------------------
 
@@ -137,7 +131,7 @@ def validoNombre(letra,opcion,cadena,minimo,X):
 	while((len(nombre) > 50) or (len(nombre) < 2)):
 		salto()
 		print(ec+'x ',cadena,'debe contener mínimo',minimo,'caracteres!'+cierre)
-		reintentar()
+		presione('reintentar')
 		opcionGestion(letra,opcion)
 		nombre = input('> Ingrese nombre nuevamente: ')
 	n = buscoNombre(X,nombre)
@@ -149,7 +143,7 @@ def validoUbicación(letra,opcion,cadena,minimo,X):
 	while((len(X[tl][1]) > 50) or (len(X[tl][1]) < 1)):
 		salto()
 		print(ec+'x ',cadena,'debe contener mínimo',minimo,'caracteres!'+cierre)
-		reintentar()
+		presione('reintentar')
 		opcionGestion(letra,opcion)
 		X[tl][1] = input('> Ingrese ubicación nuevamente: ')
 
@@ -160,7 +154,7 @@ def validoRubro(letra,opcion,cadena,X):
 	while(X[tl][2] != 'Comida') and (X[tl][2] != 'Indumentaria') and (X[tl][2] != 'Perfumeria'):
 		salto()
 		print(ec+'x ',cadena,'ingresado debe ser comida, indumentria o perfumeria!'+cierre)
-		reintentar()
+		presione('reintentar')
 		opcionGestion(letra,opcion)
 		X[tl][2] = input('> Ingrese rubro nuevamente: ').capitalize()
 
@@ -172,19 +166,17 @@ def validoCodigo(letra,opcion,cadena,minimo,X):
 	while(codigo == '0'):
 		salto()
 		print(ec+'x ',cadena,'ingresado debe ser distinto de',minimo,+cierre)
-		reintentar()
+		presione('reintentar')
 		opcionGestion(letra,opcion)
 		codigo = input('> Ingrese codigo nuevamente: ')
 	c = buscoCodigo(X,codigo)
 
 def muestroDescendente(Y,W):
 	opcionGestion('a','CREAR')
-	print('     CANTIDAD              RUBRO')
-	print(' ------------------------------------')
+	print('     CANTIDAD              RUBRO\n'' ------------------------------------')
 	for i  in range(3):
 		if(Y[i] != 0):
 			print('       ',Y[i],'             ',W[i])
-	print()
 
 def sumoLocal(Y,W,tipo):
 	t = buscoRubro(W,tipo)
@@ -237,7 +229,7 @@ def CREAR(X,Z,Y,W):
 				salto()
 				X[tl][3] = 'A'
 				sumoLocal(Y,W,X[tl][2])
-				print(cvc+'¡Los datos se cargaron correctamente!'+cierre)
+				print('\n'+cvc+'¡Los datos se cargaron correctamente!'+cierre)
 				presione('continuar')
 				tl = tl + 1
 			else:
