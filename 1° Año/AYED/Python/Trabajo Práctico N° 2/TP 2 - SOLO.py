@@ -353,36 +353,20 @@ def ACCESO():
 		if((usuario == D[f][1]) and (contraseña != D[f][2])):
 			print(efc+'\nx ¡Contraseña ingresada incorecta!'+cierre+'\n''__________________________________''\n'+esc+'\nx Contraseña:'+cierre,ec+contraseña+cierre+'\n')
 		elif((usuario != D[f][1]) and (contraseña == D[f][2])):
-			print()
-			print(efc+'x ¡El usuario ingresado no está registrado!'+cierre)
-			print('___________________________________________')
-			print()
-			print(esc+'x Usuario:'+cierre,ec+usuario+cierre)
-			print()
+			print(efc+'\nx ¡El usuario ingresado no está registrado!'+cierre+'\n''___________________________________________''\n'+esc+'\nx Usuario:'+cierre,ec+usuario+cierre+'\n')
 		elif((usuario != D[f][1]) and (contraseña != D[f][2])):
-			print()
-			print(efc+'x ¡Los datos ingresados son incorrectos!'+cierre)
-			print('________________________________________')
-			print()
-			print(esc+'x Usuario:'+cierre,ec+usuario+cierre)
-			print(esc+'x Contraseña:'+cierre,ec+contraseña+cierre)
-			print()
+			print(efc+'\nx ¡Los datos ingresados son incorrectos!'+cierre+'\n''________________________________________''\n'+esc+'\nx Usuario:'+cierre,ec+usuario+cierre+esc+'\nx Contraseña:'+cierre,ec+contraseña+cierre+'\n')
 		intentos = intentos - 1
-		print(ec+'Le quedan',intentos,'intentos.'+cierre)
-		print()
-		print(pcyan+'* Presione una tecla para continuar...'+cierre)
-		msvcrt.getch()
+		print(ec+'Le quedan',intentos,'intentos.'+cierre+'\n')
+		presione('reintentar')
 		salto()
 	if(intentos != 0):
 		tituloIniciar()
 		decision = input('¿Desea continuar en el programa? S / N \n\n> ').upper()
-		print()
 		salto()
 		while (decision != 'N') and (decision != 'S'):
-			print()
+			caracterInvalido()
 			tituloIniciar()
-			print(efc+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
-			print()
 			decision = input('¿Desea continuar en el programa? S / N \n\n> ').upper()
 			salto()
 	else:
