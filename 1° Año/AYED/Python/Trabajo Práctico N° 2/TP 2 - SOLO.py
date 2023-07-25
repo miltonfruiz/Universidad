@@ -382,7 +382,6 @@ def PROGRAMA():
 	intentos = 3
 	tituloBienvenida()
 	decision = input('¿Desea iniciar sesion? S / N \n\n> ').upper()
-	print()
 	while (decision != 'N') and (decision != 'S'):
 		caracterInvalido()
 		tituloBienvenida()
@@ -391,7 +390,7 @@ def PROGRAMA():
 	while(decision != 'N' and intentos != 0):
 		ACCESO()
 	salto()
-	print('¡Gracias por su visita!\n')
+	print('¡Gracias por su visita!')
 	msvcrt.getch()
 
 #------------------------------------------------------->  Carga de Arreglos <-------------------------------------------------------
