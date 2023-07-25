@@ -31,24 +31,19 @@ cierre = '\033[0;m'
 
 #-----------------------------------------------------------> Extras <------------------------------------------------------------
 
-#funcion para opciones y titulos parametrizados
+#funcion para opciones y titulos
 def opcionGestion(opc,x):
-	print(blanco+'>>>',opc,')',x,'LOCAL'+cierre)
-	print()
+	print(blanco+'>>>',opc,x,'LOCAL'+cierre+'\n')
 
 def desea(opcion,titulo,pregunta):
 	global des
-	print('¿Desea',pregunta,'local? S / N')
-	print()
+	print('¿Desea',pregunta,'local? S / N\n')
 	des = input('> ').upper()
-	print()
 	while (des != 'N') and (des != 'S'):
 		caracterInvalido()
 		opcionGestion(opcion,titulo)
-		print('¿Desea',pregunta,'local? S / N')
-		print()
+		print('¿Desea',pregunta,'local? S / N\n')
 		des = input('> ').upper()
-		print()
 
 #-----------------------------------------------------------> Búsquedas <------------------------------------------------------------
 
@@ -233,7 +228,7 @@ def muestroLocales():
 def CREAR(X,Z,Y,W):
 	global tl
 	muestroLocales()
-	opcionGestion('a','CREAR')
+	opcionGestion('a)','CREAR')
 	desea('a','CREAR','crear')
 	while(des !='N') and (tl != 50):
 		validoNombre('a','CREAR','!El nombre','3',X)
@@ -441,8 +436,8 @@ def PROGRAMA():
         locales: array[0..49,0..3] of string;
         mapa: array[1..10,1..5] of integer;
         clocal: array[1..50] of integer;
-        trubros: array[1..3] of integer;
-        rubros: array[1..3] of string;
+        trubros: array[0..2] of integer;
+        rubros: array[0..2] of string;
 	var D: datos;
 		L: locales;
 		m: mapa;
