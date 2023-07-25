@@ -370,10 +370,8 @@ def ACCESO():
 			decision = input('¿Desea continuar en el programa? S / N \n\n> ').upper()
 			salto()
 	else:
-		print(efc+'x !Ha alcanzado el límite de intentos!'+cierre)
-		print('______________________________________')
-		print()
-		print(pcyan+'* Presione una tecla para cerrar sesion... '+cierre)
+		print(efc+'x !Ha alcanzado el límite de intentos!'+cierre+'\n''______________________________________''\n')
+		presione('cerrar sesión')
 		msvcrt.getch()
 
 #-------------------------------------------------------> Programa Principal <-------------------------------------------------------
