@@ -257,8 +257,7 @@ def admCartel():
 	salto()
 
 def localOpcion():
-	print(blanco+'>>> 1. GESTIÓN DE LOCALES\n'+cierre)
-	print('       a) Crear local\n''       b) Modificar local\n''       c) Eliminar local\n''       d) Mapa local\n''       e) Volver\n')
+	print(blanco+'>>> 1. GESTIÓN DE LOCALES\n'+cierre+'\n''       a) Crear local\n''       b) Modificar local\n''       c) Eliminar local\n''       d) Mapa local\n''       e) Volver\n')
 
 def admLocales():
 	localOpcion()
@@ -352,12 +351,7 @@ def ACCESO():
 		salto()
 	else:
 		if((usuario == D[f][1]) and (contraseña != D[f][2])):
-			print()
-			print(efc+'x ¡Contraseña ingresada incorecta!'+cierre)
-			print('__________________________________')
-			print()
-			print(esc+'x Contraseña:'+cierre,ec+contraseña+cierre)
-			print()
+			print(efc+'\nx ¡Contraseña ingresada incorecta!'+cierre+'\n''__________________________________''\n'+esc+'\nx Contraseña:'+cierre,ec+contraseña+cierre+'\n')
 		elif((usuario != D[f][1]) and (contraseña == D[f][2])):
 			print()
 			print(efc+'x ¡El usuario ingresado no está registrado!'+cierre)
