@@ -82,9 +82,9 @@ def tituloBienvenida():
 
 #-------------------------------------------------------> Opciones Inválidos <-------------------------------------------------------
 
-def continuar():
+def presione(accion):
 	print()
-	print(pcyan+'* Presione una tecla para continuar...'+cierre)
+	print(pcyan+'* Presione una tecla para',accion,'...'+cierre)
 	msvcrt.getch()
 	salto()
 
@@ -97,14 +97,12 @@ def reintentar():
 def usuarioInvalido():
 	salto()
 	tituloIniciar()
-	print(ec+'x !Debe contener mínimo 7 caracteres!'+cierre)
-	print()
+	print(ec+'x !Debe contener mínimo 7 caracteres!'+cierre+'\n')
 
 def contraseñaInvalida():
 	salto()
 	tituloIniciar()
-	print(ec+'x !Debe contener mínimo 4 caracteres!'+cierre)
-	print()
+	print(ec+'x !Debe contener mínimo 4 caracteres!'+cierre+'\n')
 
 def admInvalida():
 	salto()
@@ -217,10 +215,10 @@ def muestroLocales():
 		for f in range(50):
 			if(L[f][0] != ''):
 				print(L[f][0],'     ',L[f][1],'      ',L[f][2],'    ',L[f][3])
-		continuar()
+		presione('continuar')
 	elif(decs == 'S') and (L[0][0] == ''):
 			print(ec+'Por el momento no se han cargado locales.'+cierre)
-			continuar()
+			presione('continuar')
 	salto()
 
 def CREAR(X,Z,Y,W):
@@ -240,16 +238,16 @@ def CREAR(X,Z,Y,W):
 				X[tl][3] = 'A'
 				sumoLocal(Y,W,X[tl][2])
 				print(cvc+'¡Los datos se cargaron correctamente!'+cierre)
-				continuar()
+				presione('continuar')
 				tl = tl + 1
 			else:
 				salto()
 				print('Ese codigo no pertenece al dueño de un local!')
-				continuar()
+				presione('continuar')
 		else:
 			print()
 			print(ec+'¡Ese nombre ya existe!'+cierre)
-			continuar()
+			presione('continuar')
 		opcionGestion('a','CREAR')
 		desea('a','CREAR','crear')
 		salto()
@@ -352,7 +350,7 @@ def ACCESO():
 		match D[f][3]:
 			case 'administrador':
 				print(cvc+'¡Verificación de Administrador exitosa!'+cierre)
-				continuar()
+				presione('continuar')
 				ADMINISTRADOR()
 			case 'dueñoLocal':
 				print('DUEÑO LOCAL')
