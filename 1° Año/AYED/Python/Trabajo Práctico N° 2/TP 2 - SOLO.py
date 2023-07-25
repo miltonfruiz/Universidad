@@ -172,7 +172,7 @@ def validoCodigo(letra,opcion,cadena,minimo,X):
 	c = buscoCodigo(X,codigo)
 
 def muestroDescendente(Y,W):
-	opcionGestion('a','CREAR')
+	opcionGestion('a)','CREAR')
 	print('     CANTIDAD              RUBRO\n'' ------------------------------------')
 	for i  in range(3):
 		if(Y[i] != 0):
@@ -192,16 +192,16 @@ def sumoLocal(Y,W,tipo):
 
 def muestroLocales():
 	global decs,c
-	opcionGestion('a','CREAR')
+	opcionGestion('a)','CREAR')
 	decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
 	print()
 	while (decs != 'N') and (decs != 'S'):
 		caracterInvalido()
-		opcionGestion('a','CREAR')
+		opcionGestion('a)','CREAR')
 		decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
 	salto()
 	if(decs == 'S') and (L[0][0] != ''):
-		opcionGestion('a','CREAR')
+		opcionGestion('a)','CREAR')
 		print('NOMBRE       UBICACIÓN       RUBRO       ESTADO')
 		print('-----------------------------------------------')
 		for f in range(50):
@@ -240,7 +240,7 @@ def CREAR(X,Z,Y,W):
 			print()
 			print(ec+'¡Ese nombre ya existe!'+cierre)
 			presione('continuar')
-		opcionGestion('a','CREAR')
+		opcionGestion('a)','CREAR')
 		desea('a','CREAR','crear')
 		salto()
 	salto()
