@@ -121,19 +121,28 @@ def ordenoCantidad(Y,W):
 				W[i] = W[j]
 				W[j] = aux2
 
+def ordenoLocales(X):
+	for i in range(49):
+		for j in range(i+1,50):
+			if(X[i][0] > X[j][0]):
+				for k in range(4):
+					aux = X[i][k]
+					X[i][k] = X[j][k]
+					X[j][k] = aux
+
 #-------------------------------------------------> Opciones de Gestión de Locales <-------------------------------------------------
 
 def validoNombre(letra,opcion,cadena,minimo,X):
 	global nombre, n
 	salto()
 	opcionGestion(letra,opcion)
-	nombre = input('> Ingrese nombre: ')
+	nombre = input('> Ingrese nombre: ').capitalize()
 	while((len(nombre) > 50) or (len(nombre) < 2)):
 		salto()
 		print(ec+'x ',cadena,'debe contener mínimo',minimo,'caracteres!'+cierre)
 		presione('reintentar')
 		opcionGestion(letra,opcion)
-		nombre = input('> Ingrese nombre nuevamente: ')
+		nombre = input('> Ingrese nombre nuevamente: ').capitalize()
 	n = buscoNombre(X,nombre)
 
 def validoUbicación(letra,opcion,cadena,minimo,X):
@@ -190,7 +199,7 @@ def sumoLocal(Y,W,tipo):
 	ordenoCantidad(Y,W)
 	muestroDescendente(Y,W)
 
-def muestroLocales():
+def muestroLocales(X):
 	global decs,c
 	opcionGestion('a)','CREAR')
 	decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
@@ -200,13 +209,14 @@ def muestroLocales():
 		opcionGestion('a)','CREAR')
 		decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
 	salto()
-	if(decs == 'S') and (L[0][0] != ''):
+	if(decs == 'S') and (X[tl-1][0] != ''):
+		ordenoLocales(X)
 		opcionGestion('a)','CREAR')
 		print('NOMBRE       UBICACIÓN       RUBRO       ESTADO')
 		print('-----------------------------------------------')
 		for f in range(50):
-			if(L[f][0] != ''):
-				print(L[f][0],'     ',L[f][1],'      ',L[f][2],'    ',L[f][3])
+			if(X[f][0] != ''):
+				print(X[f][0],'     ',X[f][1],'      ',X[f][2],'    ',X[f][3])
 		presione('continuar')
 	elif(decs == 'S') and (L[0][0] == ''):
 			print(ec+'Por el momento no se han cargado locales.'+cierre)
@@ -215,16 +225,16 @@ def muestroLocales():
 
 def CREAR(X,Z,Y,W):
 	global tl
-	muestroLocales()
+	muestroLocales(X)
 	opcionGestion('a)','CREAR')
 	desea('a','CREAR','crear')
 	while(des !='N') and (tl != 50):
-		validoNombre('a','CREAR','!El nombre','3',X)
+		validoNombre('a)','CREAR','!El nombre','3',X)
 		if(X[n][0] != nombre):
 			X[tl][0] = nombre
-			validoUbicación('a','CREAR','!La ubicación','2',X)
-			validoRubro('a','CREAR','!El rubro',X)
-			validoCodigo('a','CREAR','!El código','0',Z)
+			validoUbicación('a)','CREAR','!La ubicación','2',X)
+			validoRubro('a)','CREAR','!El rubro',X)
+			validoCodigo('a)','CREAR','!El código','0',Z)
 			if(Z[c][0] == codigo) and (Z[c][3] == 'dueñoLocal'):
 				salto()
 				X[tl][3] = 'A'
