@@ -182,7 +182,7 @@ def validoCodigo(letra,opcion,cadena,minimo,X):
 
 def muestroDescendente(Y,W):
 	opcionGestion('a)','CREAR')
-	print('     CANTIDAD              RUBRO\n'' ------------------------------------')
+	print('     TOTAL              RUBRO\n'' ------------------------------------')
 	for i  in range(3):
 		if(Y[i] != 0):
 			print('       ',Y[i],'             ',W[i])
@@ -197,6 +197,8 @@ def sumoLocal(Y,W,tipo):
 		case 'Perfumeria':
 			Y[t] = Y[t] + 1
 	ordenoCantidad(Y,W)
+	print(cvc+'¡Los datos se cargaron correctamente!'+cierre)
+	presione('visualizar rubros cargados hastas el momento')
 	muestroDescendente(Y,W)
 
 def muestroLocales(X):
@@ -239,7 +241,6 @@ def CREAR(X,Z,Y,W):
 				salto()
 				X[tl][3] = 'A'
 				sumoLocal(Y,W,X[tl][2])
-				print('\n'+cvc+'¡Los datos se cargaron correctamente!'+cierre)
 				presione('continuar')
 				tl = tl + 1
 			else:
@@ -253,6 +254,8 @@ def CREAR(X,Z,Y,W):
 		opcionGestion('a)','CREAR')
 		desea('a','CREAR','crear')
 		salto()
+	salto()
+	presione('volver al menú anterior')
 	salto()
 
 #----------------------------------------------------> Opciones de Administrador <---------------------------------------------------
@@ -347,11 +350,10 @@ def ACCESO():
 	salto()
 	f = buscoUsuario(usuario,contraseña,D)
 	if (D[f][1] == usuario and D[f][2] == contraseña):
-		print()
 		match D[f][3]:
 			case 'administrador':
 				print(cvc+'¡Verificación de Administrador exitosa!'+cierre)
-				presione('continuar')
+				presione('acceder al menú')
 				ADMINISTRADOR()
 			case 'dueñoLocal':
 				print('DUEÑO LOCAL')
