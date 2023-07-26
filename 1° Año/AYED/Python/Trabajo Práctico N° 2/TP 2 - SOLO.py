@@ -108,6 +108,12 @@ def caracterInvalido():
 	print(ec+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
 	presione('reintentar')
 
+def reset(X,f):
+	X[f][0] = ''
+	X[f][1] = ''
+	X[f][2] = ''
+	X[f][3] = ''
+
 #---------------------------------------------------------> Ordenamientos <----------------------------------------------------------
 
 def ordenoCantidad(Y,W):
@@ -172,7 +178,7 @@ def validoCodigo(letra,opcion,cadena,minimo,X):
 	salto()
 	opcionGestion(letra,opcion)
 	codigo = input('> Ingrese codigo: ')
-	while(codigo == '0'):
+	while(codigo == '-1'):
 		salto()
 		print(ec+'x ',cadena,'ingresado debe ser distinto de',minimo,+cierre)
 		presione('reintentar')
@@ -201,19 +207,19 @@ def sumoLocal(Y,W,tipo):
 	presione('visualizar rubros cargados hastas el momento')
 	muestroDescendente(Y,W)
 
-def muestroLocales(X):
+def muestroLocales(X,letra,opcion):
 	global decs,c
-	opcionGestion('a)','CREAR')
+	opcionGestion(letra,opcion)
 	decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
 	print()
 	while (decs != 'N') and (decs != 'S'):
 		caracterInvalido()
-		opcionGestion('a)','CREAR')
+		opcionGestion(letra,opcion)
 		decs = input('¿Desea ver locales cargados? S / N \n\n> ').upper()
 	salto()
 	if(decs == 'S') and (X[tl-1][0] != ''):
 		ordenoLocales(X)
-		opcionGestion('a)','CREAR')
+		opcionGestion(letra,opcion)
 		print('NOMBRE       UBICACIÓN       RUBRO       ESTADO')
 		print('-----------------------------------------------')
 		for f in range(50):
@@ -227,36 +233,50 @@ def muestroLocales(X):
 
 def CREAR(X,Z,Y,W):
 	global tl
-	muestroLocales(X)
+	muestroLocales(X,'a)','CREAR')
 	opcionGestion('a)','CREAR')
 	desea('a','CREAR','crear')
 	while(des !='N') and (tl != 50):
 		validoNombre('a)','CREAR','!El nombre','3',X)
-		if(X[n][0] != nombre):
-			X[tl][0] = nombre
-			validoUbicación('a)','CREAR','!La ubicación','2',X)
-			validoRubro('a)','CREAR','!El rubro',X)
-			validoCodigo('a)','CREAR','!El código','0',Z)
-			if(Z[c][0] == codigo) and (Z[c][3] == 'dueñoLocal'):
-				salto()
-				X[tl][3] = 'A'
-				sumoLocal(Y,W,X[tl][2])
-				presione('continuar')
-				tl = tl + 1
-			else:
-				salto()
-				print('Ese codigo no pertenece al dueño de un local!')
-				presione('continuar')
-		else:
-			print()
+		while(X[n][0] == nombre):
+			salto()
 			print(ec+'¡Ese nombre ya existe!'+cierre)
-			presione('continuar')
+			presione('reintentar')
+			validoNombre('a)','CREAR','!El nombre','3',X)
+		X[tl][0] = nombre
+		validoUbicación('a)','CREAR','!La ubicación','2',X)
+		validoRubro('a)','CREAR','!El rubro',X)
+		validoCodigo('a)','CREAR','!El código','0',Z)
+		while(Z[c][0] != codigo) and (Z[c][3] != 'dueñoLocal'):
+			salto()
+			print(ec+'Ese codigo no pertenece al dueño de un local!'+cierre)
+			presione('reintentar')
+			validoCodigo('a)','CREAR','!El código','0',Z)
+		salto()
+		X[tl][3] = 'A'
+		sumoLocal(Y,W,X[tl][2])
+		presione('continuar')
+		tl = tl + 1
 		opcionGestion('a)','CREAR')
 		desea('a','CREAR','crear')
 		salto()
 	salto()
 	presione('volver al menú anterior')
 	salto()
+
+def MODIFICAR(X):
+	muestroLocales(X,'b)','MODIFICAR')
+	opcionGestion('b)','MODIFICAR')
+	desea('b','MODIFICAR','modificar')
+	while(des !='N'):
+		validoCodigo('b)','MODIFICAR','!El código','0',X)
+		if(X[c][0] == codigo):
+			salto()
+			print(X[c][0],X[c][1],X[c][2],X[c][3])
+		else:
+			salto()
+			print('Ese codigo no pertenece al dueño de un local!')
+			presione('continuar')
 
 #----------------------------------------------------> Opciones de Administrador <---------------------------------------------------
 
@@ -282,7 +302,7 @@ def admLocales():
 				CREAR(L,D,TR,R)
 			case 'B':
 				salto()
-				print('Modificar localesssssssssss')
+				MODIFICAR(L)
 			case 'C':
 				salto()
 				print('Eliminar localessssssssssssssssss')
