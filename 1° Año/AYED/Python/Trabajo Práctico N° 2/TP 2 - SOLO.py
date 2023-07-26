@@ -71,6 +71,12 @@ def buscoRubro(X,rubro):
 		f = f + 1
 	return f
 
+def buscoIndice(codigo):
+	f = 0
+	while((f != codigo) and (f != 50)):
+		f = f + 1
+	return f
+
 #------------------------------------------------------------> Títulos <-------------------------------------------------------------
 
 def tituloIniciar():
@@ -186,6 +192,19 @@ def validoCodigo(letra,opcion,cadena,minimo,X):
 		codigo = input('> Ingrese codigo nuevamente: ')
 	c = buscoCodigo(X,codigo)
 
+def validoIndice(letra,opcion,cadena,minimo):
+	global codigoIndice, i
+	salto()
+	opcionGestion(letra,opcion)
+	codigoIndice = int(input('> Ingrese codigo: '))
+	while(codigoIndice == '-1'):
+		salto()
+		print(ec+'x ',cadena,'ingresado debe ser distinto de',minimo,+cierre)
+		presione('reintentar')
+		opcionGestion(letra,opcion)
+		codigoIndice = int(input('> Ingrese codigo nuevamente: '))
+	i = buscoIndice(codigoIndice)
+
 def muestroDescendente(Y,W):
 	opcionGestion('a)','CREAR')
 	print('     TOTAL              RUBRO\n'' ------------------------------------')
@@ -246,7 +265,7 @@ def CREAR(X,Z,Y,W):
 		X[tl][0] = nombre
 		validoUbicación('a)','CREAR','!La ubicación','2',X)
 		validoRubro('a)','CREAR','!El rubro',X)
-		validoCodigo('a)','CREAR','!El código','0',Z)
+		validoCodigo('a)','CREAR','!El código','negativo',Z)
 		while(Z[c][0] != codigo) and (Z[c][3] != 'dueñoLocal'):
 			salto()
 			print(ec+'Ese codigo no pertenece al dueño de un local!'+cierre)
@@ -269,14 +288,21 @@ def MODIFICAR(X):
 	opcionGestion('b)','MODIFICAR')
 	desea('b','MODIFICAR','modificar')
 	while(des !='N'):
-		validoCodigo('b)','MODIFICAR','!El código','0',X)
-		if(X[c][0] == codigo):
+		validoIndice('b)','MODIFICAR','!El código','negativo')
+		while(i != codigoIndice):
 			salto()
-			print(X[c][0],X[c][1],X[c][2],X[c][3])
-		else:
-			salto()
-			print('Ese codigo no pertenece al dueño de un local!')
-			presione('continuar')
+			print(ec+'Ese codigo no pertenece al dueño de un local!'+cierre)
+			presione('reintentar')
+			validoIndice('b)','MODIFICAR','!El código','negativo')
+		salto()
+		desea('b','MODIFICAR','realmente modificar este')
+		while(des !='N'):
+			validoNombre('b)','MODIFICAR','!El nombre','3',X)
+			while(X[i][0] == nombre):
+				salto()
+				print(ec+'¡Ese nombre ya existe!'+cierre)
+				presione('reintentar')
+				validoNombre('b)','MODIFICAR','!El nombre','3',X)
 
 #----------------------------------------------------> Opciones de Administrador <---------------------------------------------------
 
