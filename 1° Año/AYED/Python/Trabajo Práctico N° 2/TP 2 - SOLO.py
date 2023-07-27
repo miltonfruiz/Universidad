@@ -157,27 +157,27 @@ def validoNombre(letra,opcion,cadena,minimo,X):
 		nombre = input('> Ingrese nombre nuevamente: ').capitalize()
 	n = buscoNombre(X,nombre)
 
-def validoUbicación(letra,opcion,cadena,minimo,X):
+def validoUbicación(letra,opcion,cadena,minimo,X,fila):
 	salto()
 	opcionGestion(letra,opcion)
-	X[tl][1] = input('> Ingrese ubicación: ')
-	while((len(X[tl][1]) > 50) or (len(X[tl][1]) < 1)):
+	X[fila][1] = input('> Ingrese ubicación: ')
+	while((len(X[fila][1]) > 50) or (len(X[fila][1]) < 1)):
 		salto()
 		print(ec+'x ',cadena,'debe contener mínimo',minimo,'caracteres!'+cierre)
 		presione('reintentar')
 		opcionGestion(letra,opcion)
-		X[tl][1] = input('> Ingrese ubicación nuevamente: ')
+		X[fila][1] = input('> Ingrese ubicación nuevamente: ')
 
-def validoRubro(letra,opcion,cadena,X):
+def validoRubro(letra,opcion,cadena,X,fila):
 	salto()
 	opcionGestion(letra,opcion)
-	X[tl][2] = input('> Ingrese rubro: ').capitalize()
-	while(X[tl][2] != 'Comida') and (X[tl][2] != 'Indumentaria') and (X[tl][2] != 'Perfumeria'):
+	X[fila][2] = input('> Ingrese rubro: ').capitalize()
+	while(X[fila][2] != 'Comida') and (X[fila][2] != 'Indumentaria') and (X[fila][2] != 'Perfumeria'):
 		salto()
 		print(ec+'x ',cadena,'ingresado debe ser comida, indumentria o perfumeria!'+cierre)
 		presione('reintentar')
 		opcionGestion(letra,opcion)
-		X[tl][2] = input('> Ingrese rubro nuevamente: ').capitalize()
+		X[fila][2] = input('> Ingrese rubro nuevamente: ').capitalize()
 
 def validoCodigo(letra,opcion,cadena,minimo,X):
 	global codigo, c
@@ -197,7 +197,7 @@ def validoIndice(letra,opcion,cadena,minimo):
 	salto()
 	opcionGestion(letra,opcion)
 	codigoIndice = int(input('> Ingrese codigo: '))
-	while(codigoIndice == '-1'):
+	while(codigoIndice < -1):
 		salto()
 		print(ec+'x ',cadena,'ingresado debe ser distinto de',minimo,+cierre)
 		presione('reintentar')
@@ -225,6 +225,17 @@ def sumoLocal(Y,W,tipo):
 	print(cvc+'¡Los datos se cargaron correctamente!'+cierre)
 	presione('visualizar rubros cargados hastas el momento')
 	muestroDescendente(Y,W)
+
+def restoLocal(Y,W,tipo):
+	t = buscoRubro(W,tipo)
+	match W[t]:
+		case 'Comida':
+			Y[t] = Y[t] - 1
+		case 'Indumentaria':
+			Y[t] = Y[t] - 1
+		case 'Perfumeria':
+			Y[t] = Y[t] - 1
+	ordenoCantidad(Y,W)
 
 def muestroLocales(X,letra,opcion):
 	global decs,c
@@ -263,8 +274,8 @@ def CREAR(X,Z,Y,W):
 			presione('reintentar')
 			validoNombre('a)','CREAR','!El nombre','3',X)
 		X[tl][0] = nombre
-		validoUbicación('a)','CREAR','!La ubicación','2',X)
-		validoRubro('a)','CREAR','!El rubro',X)
+		validoUbicación('a)','CREAR','!La ubicación','2',X,tl)
+		validoRubro('a)','CREAR','!El rubro',X,tl)
 		validoCodigo('a)','CREAR','!El código','negativo',Z)
 		while(Z[c][0] != codigo) and (Z[c][3] != 'dueñoLocal'):
 			salto()
@@ -283,26 +294,45 @@ def CREAR(X,Z,Y,W):
 	presione('volver al menú anterior')
 	salto()
 
-def MODIFICAR(X):
-	muestroLocales(X,'b)','MODIFICAR')
-	opcionGestion('b)','MODIFICAR')
-	desea('b','MODIFICAR','modificar')
-	while(des !='N'):
-		validoIndice('b)','MODIFICAR','!El código','negativo')
-		while(i != codigoIndice):
-			salto()
-			print(ec+'Ese codigo no pertenece al dueño de un local!'+cierre)
-			presione('reintentar')
+def MODIFICAR(X,Y,W):
+	global i,tl
+	if(X[0][0] != ''):
+		muestroLocales(X,'b)','MODIFICAR')
+		opcionGestion('b)','MODIFICAR')
+		desea('b','MODIFICAR','modificar algún')
+		while(des != 'N'):
 			validoIndice('b)','MODIFICAR','!El código','negativo')
-		salto()
-		desea('b','MODIFICAR','realmente modificar este')
-		while(des !='N'):
-			validoNombre('b)','MODIFICAR','!El nombre','3',X)
-			while(X[i][0] == nombre):
+			while(i != codigoIndice):
 				salto()
-				print(ec+'¡Ese nombre ya existe!'+cierre)
+				print(ec+'Ese codigo no pertenece al dueño de un local!'+cierre)
 				presione('reintentar')
+				validoIndice('b)','MODIFICAR','!El código','negativo')
+			salto()
+			opcionGestion('b)','MODIFICAR')
+			desea('b','MODIFICAR','realmente modificar este')
+			if(des == 'S'):
 				validoNombre('b)','MODIFICAR','!El nombre','3',X)
+				while(X[n][0] == nombre):
+					salto()
+					print(ec+'¡Ese nombre ya existe!'+cierre)
+					presione('reintentar')
+					validoNombre('b)','MODIFICAR','!El nombre','3',X)
+				X[i][0] = nombre
+				validoUbicación('b)','MODIFICAR','!La ubicación','2',X)
+				restoLocal(Y,W,X[i][2])
+				validoRubro('b)','MODIFICAR','!El rubro',X)
+				X[i][3] = 'A'
+				sumoLocal(Y,W,X[i][2])
+				presione('continuar')
+			opcionGestion('a)','MODIFICAR')
+			desea('a','MODIFICAR','modificar')
+			salto()
+	else:
+		print(ec+'Por el momento no se han cargado locales.'+cierre)
+		presione('continuar')
+	salto()
+	presione('volver al menú anterior')
+	salto()
 
 #----------------------------------------------------> Opciones de Administrador <---------------------------------------------------
 
@@ -328,7 +358,7 @@ def admLocales():
 				CREAR(L,D,TR,R)
 			case 'B':
 				salto()
-				MODIFICAR(L)
+				MODIFICAR(L,TR,R)
 			case 'C':
 				salto()
 				print('Eliminar localessssssssssssssssss')
