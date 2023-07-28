@@ -6,6 +6,7 @@ salto = lambda: os.system('cls')
 
 #------------------------------------------------------------> Colores <--------------------------------------------------------------
 
+aviso = '\33[2;3;33m'
 negro = '\033[30m'
 efc = '\033[2;37;41m'
 esc = '\033[3;4;31m'
@@ -14,11 +15,12 @@ fan = '\033[2;7;30;43m'
 cvc = '\033[3;32m'
 cursiva = '\033[3m'
 verde = '\033[32m'
+nvc = '\033[3;4;32m'
 amarillo = '\033[4;33m'
 azul = '\033[3;4;34m'
 purpura = '\033[35m'
 pcyan = '\033[1;36m'
-blanco = '\033[4;37m'
+blanco = '\033[1;36m'
 reset = '\033[39m'
 cierre = '\033[0;m'
 
@@ -31,9 +33,8 @@ cierre = '\033[0;m'
 
 #-----------------------------------------------------------> Extras <------------------------------------------------------------
 
-#funcion para opciones y titulos
 def opcionGestion(opc,x):
-	print(blanco+'>>>',opc,x,'LOCAL'+cierre+'\n')
+	print(blanco+'>>>',opc,x,'local'+cierre+'\n')
 
 def desea(opcion,titulo,pregunta):
 	global des
@@ -113,12 +114,6 @@ def caracterInvalido():
 	salto()
 	print(ec+'x ¡Carácter ingresado inválido, ingrese S o N!'+cierre)
 	presione('reintentar')
-
-def reset(X,f):
-	X[f][0] = ''
-	X[f][1] = ''
-	X[f][2] = ''
-	X[f][3] = ''
 
 #---------------------------------------------------------> Ordenamientos <----------------------------------------------------------
 
@@ -207,12 +202,13 @@ def validoIndice(letra,opcion,cadena,minimo):
 
 def muestroDescendente(Y,W,letra,opcion):
 	opcionGestion(letra,opcion)
-	print('     TOTAL              RUBRO\n'' ------------------------------------')
+	print(aviso+'Locales ingresados hasta el momento'+cierre)
+	print('\n     TOTAL              RUBRO\n'' ------------------------------------')
 	for i  in range(3):
 		if(Y[i] != 0):
-			print('       ',Y[i],'             ',W[i])
+			print('      ',Y[i],'              ',W[i])
 
-def sumoLocal(Y,W,tipo,letra,opcion):
+def sumoLocal(Y,W,tipo,letra,opcion,X,indice):
 	t = buscoRubro(W,tipo)
 	match W[t]:
 		case 'Comida':
@@ -222,8 +218,13 @@ def sumoLocal(Y,W,tipo,letra,opcion):
 		case 'Perfumeria':
 			Y[t] = Y[t] + 1
 	ordenoCantidad(Y,W)
+	print(nvc+'> Nuevo local creado'+cierre+'\n')
+	print(cursiva+'  Nombre: ',X[indice][0]+cierre)
+	print(cursiva+'  Ubicación: ',X[indice][1]+cierre)
+	print(cursiva+'  Rubro: ',X[indice][2]+cierre)
+	print(cursiva+'  Estado: ',X[indice][3]+cierre+'\n')
 	print(cvc+'¡Los datos se cargaron correctamente!'+cierre)
-	presione('visualizar rubros cargados hastas el momento')
+	presione('visualizar total rubros cargados hastas el momento')
 	muestroDescendente(Y,W,letra,opcion)
 
 def restoLocal(Y,W,tipo):
@@ -262,32 +263,32 @@ def muestroLocales(X,letra,opcion):
 	salto()
 
 def CREAR(X,Z,Y,W,tl):
-	muestroLocales(X,'a)','CREAR')
-	opcionGestion('a)','CREAR')
-	desea('a','CREAR','crear')
+	muestroLocales(X,'a)','Crear')
+	opcionGestion('a)','Crear')
+	desea('a','Crear','crear')
 	while(des !='N') and (tl != 50):
-		validoNombre('a)','CREAR','!El nombre','3',X)
+		validoNombre('a)','Crear','!El nombre','3',X)
 		while(X[n][0] == nombre):
 			salto()
 			print(ec+'¡Ese nombre ya existe!'+cierre)
 			presione('reintentar')
-			validoNombre('a)','CREAR','!El nombre','3',X)
+			validoNombre('a)','Crear','!El nombre','3',X)
 		X[tl][0] = nombre
-		validoUbicación('a)','CREAR','!La ubicación','2',X,tl)
-		validoRubro('a)','CREAR','!El rubro',X,tl)
-		validoCodigo('a)','CREAR','!El código','negativo',Z)
+		validoUbicación('a)','Crear','!La ubicación','2',X,tl)
+		validoRubro('a)','Crear','!El rubro',X,tl)
+		validoCodigo('a)','Crear','!El código','negativo',Z)
 		while(Z[c][0] != codigo) and (Z[c][3] != 'dueñoLocal'):
 			salto()
 			print(ec+'Ese codigo no pertenece al dueño de un local!'+cierre)
 			presione('reintentar')
-			validoCodigo('a)','CREAR','!El código','0',Z)
+			validoCodigo('a)','Crear','!El código','0',Z)
 		salto()
 		X[tl][3] = 'A'
-		sumoLocal(Y,W,X[tl][2],'a)','CREAR')
+		sumoLocal(Y,W,X[tl][2],'a)','Crear',X,tl)
 		presione('continuar')
 		tl = tl + 1
-		opcionGestion('a)','CREAR')
-		desea('a','CREAR','crear')
+		opcionGestion('a)','Crear')
+		desea('a','Crear','crear')
 		salto()
 	salto()
 	presione('volver al menú anterior')
@@ -295,37 +296,37 @@ def CREAR(X,Z,Y,W,tl):
 
 def MODIFICAR(X,Y,W):
 	global im
-	muestroLocales(X,'b)','MODIFICAR')
+	muestroLocales(X,'b)','Modificar')
 	if(X[49][0] != ''):
-		opcionGestion('b)','MODIFICAR')
-		desea('b','MODIFICAR','modificar algún')
+		opcionGestion('b)','Modificar')
+		desea('b','Modificar','modificar algún')
 		while(decs != 'N' and X[49][0] != '' and des != 'N'):
-			validoIndice('b)','MODIFICAR','!El código','entre 0-49')
+			validoIndice('b)','Modificar','!El código','entre 0-49')
 			while(im != codigoIndice):
 				salto()
 				print(ec+'Ese codigo no pertenece a un local!'+cierre)
 				presione('reintentar')
-				validoIndice('b)','MODIFICAR','!El código','entre 0-49')
+				validoIndice('b)','Modificar','!El código','entre 0-49')
 			salto()
-			opcionGestion('b)','MODIFICAR')
-			desea('b','MODIFICAR','realmente modificar este')
+			opcionGestion('b)','Modificar')
+			desea('b','Modificar','realmente modificar este')
 			if(des == 'S'):
-				validoNombre('b)','MODIFICAR','!El nombre','3',X)
+				validoNombre('b)','Modificar','!El nombre','3',X)
 				while(X[n][0] == nombre):
 					salto()
 					print(ec+'¡Ese nombre ya existe!'+cierre)
 					presione('reintentar')
-					validoNombre('b)','MODIFICAR','!El nombre','3',X)
+					validoNombre('b)','Modificar','!El nombre','3',X)
 				X[im][0] = nombre
-				validoUbicación('b)','MODIFICAR','!La ubicación','2',X,im)
+				validoUbicación('b)','Modificar','!La ubicación','2',X,im)
 				restoLocal(Y,W,X[im][2])
-				validoRubro('b)','MODIFICAR','!El rubro',X,im)
+				validoRubro('b)','Modificar','!El rubro',X,im)
 				salto()
 				X[im][3] = 'A'
-				sumoLocal(Y,W,X[im][2],'b)','MODIFICAR')
+				sumoLocal(Y,W,X[im][2],'b)','Modificar',X,im)
 				presione('continuar')
-			opcionGestion('b)','MODIFICAR')
-			desea('b','MODIFICAR','modificar algún')
+			opcionGestion('b)','Modificar')
+			desea('b','Modificar','modificar algún')
 	salto()
 	presione('volver al menú anterior')
 	salto()
