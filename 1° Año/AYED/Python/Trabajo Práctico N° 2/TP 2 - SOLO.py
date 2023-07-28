@@ -155,13 +155,13 @@ def validoNombre(letra,opcion,cadena,minimo,X):
 def validoUbicación(letra,opcion,cadena,minimo,X,fila):
 	salto()
 	opcionGestion(letra,opcion)
-	X[fila][1] = input('> Ingrese ubicación: ')
+	X[fila][1] = input('> Ingrese ubicación: ').capitalize()
 	while((len(X[fila][1]) > 50) or (len(X[fila][1]) < 1)):
 		salto()
 		print(ec+'x ',cadena,'debe contener mínimo',minimo,'caracteres!'+cierre)
 		presione('reintentar')
 		opcionGestion(letra,opcion)
-		X[fila][1] = input('> Ingrese ubicación nuevamente: ')
+		X[fila][1] = input('> Ingrese ubicación nuevamente: ').capitalize()
 
 def validoRubro(letra,opcion,cadena,X,fila):
 	salto()
@@ -251,11 +251,11 @@ def muestroLocales(X,letra,opcion):
 	salto()
 	if(decs == 'S') and (X[49][0] != ''):
 		opcionGestion(letra,opcion)
-		print('CODIGO       NOMBRE       UBICACIÓN       RUBRO       ESTADO')
-		print('------------------------------------------------------------')
+		print('CODIGO       NOMBRE         UBICACIÓN           RUBRO        ESTADO')
+		print('--------------------------------------------------------------------')
 		for f in range(0,51):
 			if(X[f][0] != ''):
-				print(' ',f,'      ',X[f][0],'     ',X[f][1],'      ',X[f][2],'    ',X[f][3])
+				print(f'  {f}         {X[f][0]}          {X[f][1]}           {X[f][2]}           {X[f][3]}')
 		presione('continuar')
 	elif(decs == 'S') and (X[0][0] == ''):
 			print(ec+'Por el momento no se han cargado locales.'+cierre)
