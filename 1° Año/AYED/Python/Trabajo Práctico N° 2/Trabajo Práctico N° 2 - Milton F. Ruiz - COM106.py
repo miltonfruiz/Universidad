@@ -331,6 +331,14 @@ def MODIFICAR(X,Y,W):
 	presione('volver al menú anterior')
 	salto()
 
+def ELIMINAR(X):
+	muestroLocales(X,'c)','Eliminar')
+	if(X[49][0] != ''):
+		opcionGestion('c)','Eliminar')
+		desea('c','Eliminar','eliminar algún')
+		while(decs != 'N' and X[49][0] != '' and des != 'N'):
+			validoIndice('b)','Modificar','!El código','entre 0-49')
+
 #----------------------------------------------------> Opciones de Administrador <---------------------------------------------------
 
 def admOpcion():
